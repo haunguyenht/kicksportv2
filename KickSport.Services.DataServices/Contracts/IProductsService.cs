@@ -20,6 +20,6 @@ namespace KickSport.Services.DataServices.Contracts
 
         Task EditAsync(ProductDto product);
 
-        bool Exists(string productId);
+        Task<bool> Exists(string productId);
     }
 }

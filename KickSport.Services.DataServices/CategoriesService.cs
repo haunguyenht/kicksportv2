@@ -24,14 +24,10 @@ namespace KickSport.Services.DataServices
 
         public async Task<IEnumerable<CategoryDto>> All()
         {
-            //return _categoriesRepository
-            //    .All()
-            //    .Select(c => )
-            //    .OrderBy(c => c.Name);
-
             var categories = await _categoriesRepository.GetAllAsync();
-            var categoryDto = _mapper.Map<IEnumerable<CategoryDto>>(categories.ToList()).OrderBy(c => c.Name).ToList();
-
+            var categoryDto = _mapper.Map<IEnumerable<CategoryDto>>(categories.ToList())
+                .OrderBy(c => c.Name)
+                .ToList();
             return categoryDto;
         }
 
@@ -40,7 +36,6 @@ namespace KickSport.Services.DataServices
             var query = await _categoriesRepository.GetAllAsync();
             var result = query.ToList().Any();
             return result;
-            //return _categoriesRepository.All().Any();
         }
 
         public async Task CreateAsync(string categoryName)

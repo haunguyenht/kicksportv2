@@ -16,7 +16,7 @@ namespace KickSport.Services.DataServices.Contracts
 
         Task DeleteReviewAsync(string reviewId);
 
-        bool Exists(string reviewId);
+        Task<bool> Exists(string reviewId);
 
         string FindReviewCreatorById(string reviewId);
     }

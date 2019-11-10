@@ -7,7 +7,7 @@ namespace KickSport.Data.Models
 {
     public class OrderProduct : BaseModel<int>
     {
-        public int ProductId { get; set; }
+        public string ProductId { get; set; }
 
         public Product Product { get; set; }
 

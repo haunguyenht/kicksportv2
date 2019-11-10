@@ -4,6 +4,7 @@ using KickSport.Data.Models.Enums;
 using KickSport.Data.Repository;
 using KickSport.Services.DataServices.Contracts;
 using KickSport.Services.DataServices.Models.Orders;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,12 +31,6 @@ namespace KickSport.Services.DataServices
 
         public async Task ApproveOrderAsync(string orderId)
         {
-            //var order = _ordersRepository
-            //    .All()
-            //    .First(o => o.Id == orderId);
-
-            //order.Status = OrderStatus.Approved;
-            //await _ordersRepository.SaveChangesAsync();
             var order = await _ordersRepository.FindOneAsync(o => o.Id == orderId);
             order.Status = OrderStatus.Approved;
             await _ordersRepository.SaveChangesAsync();
@@ -57,63 +52,67 @@ namespace KickSport.Services.DataServices
             await _ordersRepository.SaveChangesAsync();
 
             var createdOrder = _ordersRepository
-                .All()
+                .DbSet
                 .Include(o => o.Products)
                 .ThenInclude(p => p.Product)
                 .First(o => o.Id == order.Id);
-
-            return _mapper.Map<OrderDto>(createdOrder);
+            var orderDto = _mapper.Map<OrderDto>(createdOrder);
+            return orderDto;
         }
 
-        public bool Exists(string orderId)
+        public async Task<bool> Exists(string orderId)
         {
-            return _ordersRepository
-                .All()
-                .Any(o => o.Id == orderId);
+            var existOrder = await _ordersRepository.FindOneAsync(o => o.Id == orderId);
+            return existOrder != null;
         }
 
         public IEnumerable<OrderDto> GetApprovedOrders()
         {
-            return _ordersRepository
-                .All()
+            var getApproveOrders = _ordersRepository
+                .DbSet
                 .Include(o => o.Creator)
                 .Include(o => o.Products)
                 .ThenInclude(p => p.Product)
                 .Where(o => o.Status == OrderStatus.Approved)
-                .Select(o => _mapper.Map<OrderDto>(o));
+                .ToListAsync();
+            var ordersDto = _mapper.Map<IEnumerable<OrderDto>>(getApproveOrders).ToList();
+            return ordersDto;
         }
 
         public IEnumerable<OrderDto> GetPendingOrders()
         {
-            return _ordersRepository
-                .All()
+            var getPedingOrders = _ordersRepository
+                .DbSet
                 .Include(o => o.Creator)
                 .Include(o => o.Products)
                 .ThenInclude(p => p.Product)
                 .Where(o => o.Status == OrderStatus.Pending)
-                .Select(o => _mapper.Map<OrderDto>(o));
+                .ToListAsync();
+            var ordersDto = _mapper.Map<IEnumerable<OrderDto>>(getPedingOrders).ToList();
+            return ordersDto;
         }
 
         public IEnumerable<OrderDto> GetUserOrders(string userId)
         {
-            return _ordersRepository
-                .All()
+            var getUserOrders = _ordersRepository
+                .DbSet
                 .Include(o => o.Creator)
                 .Include(o => o.Products)
                 .ThenInclude(p => p.Product)
                 .Where(o => o.CreatorId == userId)
-                .Select(o => _mapper.Map<OrderDto>(o));
+                .ToListAsync();
+            var ordersDto = _mapper.Map<IEnumerable<OrderDto>>(getUserOrders).ToList();
+            return ordersDto;
         }
 
         public async Task DeleteProductOrdersAsync(string productId)
         {
             var orderProducts = _orderProductRepository
-                .All()
+                .DbSet
                 .Where(op => op.ProductId == productId)
                 .ToList();
 
             _orderProductRepository.DeleteRange(orderProducts);
-
             await _orderProductRepository.SaveChangesAsync();
         }
     }
