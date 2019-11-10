@@ -12,13 +12,13 @@ namespace KickSport.Services.DataServices.Contracts
 
         Task<OrderDto> CreateOrderAsync(string userId, IEnumerable<OrderProductDto> orderProducts);
 
-        bool Exists(string orderId);
+        Task<bool> Exists(string orderId);
 
-        IEnumerable<OrderDto> GetApprovedOrders();
+        Task<IEnumerable<OrderDto>> GetApprovedOrders();
 
-        IEnumerable<OrderDto> GetPendingOrders();
+        Task<IEnumerable<OrderDto>> GetPendingOrders();
 
-        IEnumerable<OrderDto> GetUserOrders(string userId);
+        Task<IEnumerable<OrderDto>> GetUserOrders(string userId);
 
         Task DeleteProductOrdersAsync(string productId);
     }

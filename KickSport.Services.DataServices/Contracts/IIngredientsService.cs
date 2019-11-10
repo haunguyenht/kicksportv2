@@ -8,14 +8,14 @@ namespace KickSport.Services.DataServices.Contracts
 {
     public interface IIngredientsService
     {
-        bool Any();
+        Task<bool> Any();
 
-        IEnumerable<IngredientDto> All();
+        Task<IEnumerable<IngredientDto>> All();
 
         Task CreateAsync(string ingredientName);
 
         Task CreateRangeAsync(string[] ingredientsName);
 
-        IngredientDto FindByName(string ingredientName);
+        Task<IngredientDto> FindByName(string ingredientName);
     }
 }
