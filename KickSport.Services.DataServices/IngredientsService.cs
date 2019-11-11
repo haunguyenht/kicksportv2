@@ -25,13 +25,9 @@ namespace KickSport.Services.DataServices
         }
 
         public async Task<bool> Any()
-        {
-            var query = await _ingredientsRepository.GetAllAsync();
-            var result = query.ToList().Any();
-            return result;
-        }
+        => (await _ingredientsRepository.GetAllAsync()).Any();
 
-        public async Task<IEnumerable<IngredientDto>> All()
+        public async Task<List<IngredientDto>> All()
         {
             var ingredient = await _ingredientsRepository.GetAllAsync();
             var ingredientDto = _mapper.Map<IEnumerable<IngredientDto>>(ingredient.ToList()).OrderBy(i => i.Name).ToList();

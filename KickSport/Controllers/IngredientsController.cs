@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using KickSport.Services.DataServices.Contracts;
+using KickSport.Services.DataServices.Models.Ingredients;
 using KickSport.Web.Models.Ingredients.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace KickSport.Web.Controllers
 {
@@ -25,12 +27,12 @@ namespace KickSport.Web.Controllers
         [AllowAnonymous]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<IngredientViewModel>>> Get()
+        public async Task<IActionResult> Get()
         {
-            return _ingredientsService
-                .All()
-                .Select(i => _mapper.Map<IngredientViewModel>(i))
-                .ToList();
+            var result = await _ingredientsService.All();
+
+            var ingredientView = _mapper.Map<List<IngredientDto>, List<IngredientViewModel>>(result);
+            return Ok(ingredientView);
         }
     }
 }

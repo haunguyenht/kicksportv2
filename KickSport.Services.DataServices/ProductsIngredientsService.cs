@@ -27,7 +27,7 @@ namespace KickSport.Services.DataServices
 
             if (productIngredients.Any())
             {
-                _productsIngredientsRepository.DeleteRange(productIngredients);
+                await _productsIngredientsRepository.DeleteRange(productIngredients);
                 await _productsIngredientsRepository.SaveChangesAsync();
             }
         }

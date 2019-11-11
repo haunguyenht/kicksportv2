@@ -112,7 +112,7 @@ namespace KickSport.Services.DataServices
                 .Where(op => op.ProductId == productId)
                 .ToList();
 
-            _orderProductRepository.DeleteRange(orderProducts);
+            await _orderProductRepository.DeleteRange(orderProducts);
             await _orderProductRepository.SaveChangesAsync();
         }
     }

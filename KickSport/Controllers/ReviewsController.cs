@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using KickSport.Data.Models;
 using KickSport.Services.DataServices.Contracts;
+using KickSport.Services.DataServices.Models.Reviews;
 using KickSport.Web.Models.Common;
 using KickSport.Web.Models.Reviews.InputModels;
 using KickSport.Web.Models.Reviews.ViewModels;
@@ -48,10 +49,9 @@ namespace KickSport.Web.Controllers
                 });
             }
 
-            return _reviewsService
-                .GetProductReviews(productId)
-                .Select(r => _mapper.Map<ReviewViewModel>(r))
-                .ToList();
+            var result = _reviewsService.GetProductReviews(productId);
+            var reviewView = _mapper.Map<List<ReviewDto>,List<ReviewViewModel>>(result);
+            return Ok(reviewView);
         }
 
         [HttpPost("{productId}")]

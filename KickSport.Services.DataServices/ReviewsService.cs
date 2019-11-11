@@ -43,13 +43,13 @@ namespace KickSport.Services.DataServices
             return result;
         }
 
-        public IEnumerable<ReviewDto> GetProductReviews(string productId)
+        public List<ReviewDto> GetProductReviews(string productId)
         {
             var productReviews = _reviewsRepository
                 .DbSet
                 .Include(r => r.Creator)
                 .Where(r => r.ProductId == productId).ToListAsync();
-            var reviewDto = _mapper.Map<IEnumerable<ReviewDto>>(productReviews).ToList();
+            var reviewDto = _mapper.Map<List<ReviewDto>>(productReviews).ToList();
             return reviewDto;
         }
 
@@ -62,7 +62,7 @@ namespace KickSport.Services.DataServices
 
             if (reviews.Any())
             {
-                _reviewsRepository.DeleteRange(reviews);
+                await _reviewsRepository.DeleteRange(reviews);
                 await _reviewsRepository.SaveChangesAsync();
             }
         }
@@ -73,7 +73,7 @@ namespace KickSport.Services.DataServices
                 .DbSet
                 .First(r => r.Id == reviewId);
 
-            _reviewsRepository.Delete(review);
+            await _reviewsRepository.Delete(review);
             await _reviewsRepository.SaveChangesAsync();
         }
 

@@ -6,7 +6,7 @@ namespace KickSport.Services.DataServices.Contracts
 {
     public interface ICategoriesService
     {
-        Task<IEnumerable<CategoryDto>> All();
+        Task<List<CategoryDto>> All();
 
         Task<bool> Any();
 

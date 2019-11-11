@@ -22,7 +22,7 @@ namespace KickSport.Services.DataServices
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<CategoryDto>> All()
+        public async Task<List<CategoryDto>> All()
         {
             var categories = await _categoriesRepository.GetAllAsync();
             var categoryDto = _mapper.Map<IEnumerable<CategoryDto>>(categories.ToList())
@@ -32,11 +32,7 @@ namespace KickSport.Services.DataServices
         }
 
         public async Task<bool> Any()
-        {
-            var query = await _categoriesRepository.GetAllAsync();
-            var result = query.ToList().Any();
-            return result;
-        }
+        => (await _categoriesRepository.GetAllAsync()).Any();
 
         public async Task CreateAsync(string categoryName)
         {

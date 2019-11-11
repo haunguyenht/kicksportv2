@@ -21,13 +21,13 @@ namespace KickSport.Helpers
     {
         public MappingConfiguration()
         {
-            CreateMap<RegisterInputModel, ApplicationUser>();
-            CreateMap<FacebookUserData, ApplicationUser>();
+            CreateMap<RegisterInputModel, ApplicationUser>().ReverseMap();
+            CreateMap<FacebookUserData, ApplicationUser>().ReverseMap();
 
             CreateMap<Review, ReviewDto>()
                 .ForMember(dest => dest.ReviewText, opt => opt.MapFrom(src => src.Text))
                 .ForMember(dest => dest.CreatorUsername, opt => opt.MapFrom(src => src.Creator.UserName));
-            CreateMap<ReviewDto, ReviewViewModel>();
+            CreateMap<ReviewDto, ReviewViewModel>().ReverseMap();
 
             CreateMap<Product, ProductDto>()
                 .ForMember(dest => dest.Likes, opt => opt.MapFrom(src => src.Likes.Select(l => l.ApplicationUser)))
@@ -46,14 +46,14 @@ namespace KickSport.Helpers
                 .ForMember(dest => dest.Likes,
                     opt => opt.MapFrom(src => src.Likes.Select(u => u.UserName)));
 
-            CreateMap<Category, CategoryDto>();
-            CreateMap<CategoryDto, CategoryViewModel>();
+            CreateMap<Category, CategoryDto>().ReverseMap();
+            CreateMap<CategoryDto, CategoryViewModel>().ReverseMap();
 
-            CreateMap<Ingredient, IngredientDto>();
-            CreateMap<IngredientDto, IngredientViewModel>();
+            CreateMap<Ingredient, IngredientDto>().ReverseMap();
+            CreateMap<IngredientDto, IngredientViewModel>().ReverseMap();
 
-            CreateMap<OrderProductInputModel, OrderProductDto>();
-            CreateMap<OrderProductDto, OrderProductViewModel>();
+            CreateMap<OrderProductInputModel, OrderProductDto>().ReverseMap();
+            CreateMap<OrderProductDto, OrderProductViewModel>().ReverseMap();
             CreateMap<OrderProductDto, OrderProduct>()
                 .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Id, opt => opt.Ignore());

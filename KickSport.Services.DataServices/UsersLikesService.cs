@@ -38,7 +38,7 @@ namespace KickSport.Services.DataServices
 
             if (productLikes.Any())
             {
-                _usersLikesRepository.DeleteRange(productLikes);
+                await _usersLikesRepository.DeleteRange(productLikes);
                 await _usersLikesRepository.SaveChangesAsync();
             }
         }
@@ -51,7 +51,7 @@ namespace KickSport.Services.DataServices
 
             if (userLike != null)
             {
-                _usersLikesRepository.Delete(userLike);
+                await _usersLikesRepository.Delete(userLike);
                 await _usersLikesRepository.SaveChangesAsync();
             }
         }

@@ -10,7 +10,7 @@ namespace KickSport.Services.DataServices.Contracts
     {
         Task<ReviewDto> CreateAsync(string text, string creatorId, string productId);
 
-        IEnumerable<ReviewDto> GetProductReviews(string productId);
+        List<ReviewDto> GetProductReviews(string productId);
 
         Task DeleteProductReviewsAsync(string productId);
 

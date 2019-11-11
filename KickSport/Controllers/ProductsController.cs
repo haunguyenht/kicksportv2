@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using KickSport.Data.Models;
 using KickSport.Services.DataServices.Contracts;
+using KickSport.Services.DataServices.Models.Products;
 using KickSport.Web.Models.Common;
 using KickSport.Web.Models.Products.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -38,12 +39,12 @@ namespace KickSport.Web.Controllers
         [AllowAnonymous]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<IEnumerable<ProductViewModel>> All()
+        public async Task<ActionResult> All()
         {
-            return _productsService
-                .All()
-                .Select(p => _mapper.Map<ProductViewModel>(p))
-                .ToList();
+            var result = await _productsService.All();
+            var productView = _mapper.Map<List<ProductDto>, List<ProductViewModel>>(result);
+
+            return Ok(productView);
         }
 
         [HttpPost("{productId}")]
@@ -64,7 +65,8 @@ namespace KickSport.Web.Controllers
             try
             {
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
-                var product = _productsService.All().First(p => p.Id == productId);
+                var result = await _productsService.All();
+                var product = result.First(p => p.Id == productId);
 
                 if (product.Likes.Any(u => u.Id == user.Id))
                 {

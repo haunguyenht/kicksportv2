@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using KickSport.Services.DataServices.Contracts;
+using KickSport.Services.DataServices.Models.Categories;
 using KickSport.Web.Models.Categories.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace KickSport.Web.Controllers
 {
@@ -25,13 +27,13 @@ namespace KickSport.Web.Controllers
         [AllowAnonymous]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<IEnumerable<CategoryViewModel>> Get()
+        public async Task<IActionResult> Get()
         {
-            var x = _categoriesService
-                .All()
-                .Select(c => _mapper.Map<CategoryViewModel>(c))
-                .ToList();
-            return x;
+            var result = await _categoriesService.All();
+            var categoryView = _mapper.Map<List<CategoryDto>, List<CategoryViewModel>>(result);
+
+            return Ok(categoryView);
+
         }
     }
 }

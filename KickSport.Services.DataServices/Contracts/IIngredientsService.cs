@@ -10,7 +10,7 @@ namespace KickSport.Services.DataServices.Contracts
     {
         Task<bool> Any();
 
-        Task<IEnumerable<IngredientDto>> All();
+        Task<List<IngredientDto>> All();
 
         Task CreateAsync(string ingredientName);
 

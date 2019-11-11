@@ -25,9 +25,9 @@ namespace KickSport.Services.DataServices
             _mapper = mapper;
         }
 
-        public IEnumerable<ProductDto> All()
+        public async Task<List<ProductDto>> All()
         {
-            var products = _productsRepository
+            var products = await _productsRepository
                 .DbSet
                 .AsNoTracking()
                 .Include(p => p.Category)
@@ -53,9 +53,9 @@ namespace KickSport.Services.DataServices
             await _productsRepository.SaveChangesAsync();
         }
 
-        public async Task CreateRangeAsync(IEnumerable<ProductDto> productsDtos)
+        public async Task CreateRangeAsync(IEnumerable<ProductDto> productsDto)
         {
-            var products = productsDtos
+            var products = productsDto
                 .Select(pdto => _mapper.Map<Product>(pdto));
 
             await _productsRepository.AddRangeAsync(products);
@@ -67,7 +67,7 @@ namespace KickSport.Services.DataServices
             var product = await _productsRepository
                 .FirstAsync(p => p.Id == productId);
 
-            _productsRepository.Delete(product);
+            await _productsRepository.Delete(product);
             await _productsRepository.SaveChangesAsync();
         }
 
@@ -75,7 +75,7 @@ namespace KickSport.Services.DataServices
         {
             var product = _mapper.Map<Product>(productDto);
 
-            _productsRepository.Update(product);
+            await _productsRepository.Update(product);
             await _productsRepository.SaveChangesAsync();
         }
 
