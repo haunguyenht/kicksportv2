@@ -62,7 +62,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
         {
             if (User.IsInRole("Administrator"))
             {
-                if (_productsService.All().Any(p => p.Name == model.Name))
+                if ((await _productsService.All()).Any(p => p.Name == model.Name))
                 {
                     return BadRequest(new BadRequestViewModel
                     {
@@ -108,8 +108,8 @@ namespace KickSport.Web.Areas.Admin.Controllers
                     try
                     {
                         await _productsService.CreateAsync(productDto);
-                        var createdProductDto = _productsService
-                            .All()
+                        var createdProductDto = (await _productsService
+                            .All())
                             .First(p => p.Name == productDto.Name);
 
                         var createdProductViewModel = _mapper.Map<ProductViewModel>(createdProductDto);
@@ -159,11 +159,11 @@ namespace KickSport.Web.Areas.Admin.Controllers
                 var productCategory = _categoriesService.FindByName(model.Category);
                 if (productCategory != null)
                 {
-                    var productDto = _productsService
-                        .All()
+                    var productDto = (await _productsService.All())
                         .First(p => p.Id == productId);
 
-                    if (productDto.Name != model.Name && _productsService.All().Any(p => p.Name == model.Name))
+                    if (productDto.Name != model.Name && (await _productsService.All())
+                        .Any(p => p.Name == model.Name))
                     {
                         return BadRequest(new BadRequestViewModel
                         {
@@ -206,8 +206,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
                     try
                     {
                         await _productsService.EditAsync(productDto);
-                        var editedProductDto = _productsService
-                            .All()
+                        var editedProductDto = (await _productsService.All())
                             .First(p => p.Name == productDto.Name);
 
                         return new SuccessViewModel<ProductViewModel>

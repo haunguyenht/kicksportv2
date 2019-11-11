@@ -7,6 +7,7 @@ using KickSport.Services.DataServices;
 using KickSport.Services.DataServices.Contracts;
 using KickSport.Web.Helpers.Logging;
 using KickSport.Web.Hubs;
+using KickSport.Web.SeedData.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,7 +38,7 @@ namespace KickSport
             services.AddDbContext<KickSportDbContext>(options =>
             {
                 options.UseSqlServer(
-                    this.Configuration.GetConnectionString("DefaultConnection"));
+                    Configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddAutoMapper(typeof(MappingConfiguration));
@@ -136,6 +137,11 @@ namespace KickSport
                 .AllowAnyHeader()
                 .AllowCredentials()
                 .WithOrigins("http://localhost:4200"));
+
+            app.UseSeedAdmin();
+            app.UseSeedCategories();
+            app.UseSeedIngredients();
+            app.UseSeedProducts();
 
             app.UseAuthentication();
             app.UseAuthorization();

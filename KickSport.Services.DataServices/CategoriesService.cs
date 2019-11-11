@@ -57,9 +57,9 @@ namespace KickSport.Services.DataServices
             await _categoriesRepository.SaveChangesAsync();
         }
 
-        public CategoryDto FindByName(string categoryName)
+        public async Task<CategoryDto> FindByName(string categoryName)
         {
-            var query = _categoriesRepository.FindOneAsync(x => x.Name == categoryName);
+            var query = await _categoriesRepository.FindOneAsync(x => x.Name == categoryName);
             var categoryDto = _mapper.Map<CategoryDto>(query);
 
             return categoryDto;

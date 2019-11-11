@@ -14,6 +14,6 @@ namespace KickSport.Services.DataServices.Contracts
 
         Task CreateRangeAsync(string[] categoriesName);
 
-        CategoryDto FindByName(string categoryName);
+        Task<CategoryDto> FindByName(string categoryName);
     }
 }

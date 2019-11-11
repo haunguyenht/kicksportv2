@@ -65,8 +65,7 @@ namespace KickSport.Web.Controllers
             try
             {
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
-                var result = await _productsService.All();
-                var product = result.First(p => p.Id == productId);
+                var product = (await _productsService.All()).First(p => p.Id == productId);
 
                 if (product.Likes.Any(u => u.Id == user.Id))
                 {
