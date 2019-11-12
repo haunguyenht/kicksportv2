@@ -29,193 +29,163 @@ namespace KickSport.Web.SeedData
                 var categoriesService = provider.GetService<ICategoriesService>();
                 var products = new List<ProductDto>();
 
-                var margheritaIngredients = new string[] { "olive oil", "yellow cheese", "tomato sauce" };
-                var margherita = new ProductDto
+                var nikeIngredients = new string[] { "leather", "cloth", "rubber" };
+                var nike = new ProductDto
                 {
-                    Name = "Margherita",
-                    Description = "Pizza Margherita is a typical Neapolitan pizza, made with San Marzano tomatoes, mozzarella fior di latte, fresh basil, salt and extra-virgin olive oil.",
+                    Name = "Nike Airforce 1",
+                    Description = "Designed by Bruce Kilgore and introduced in 1982, the Air Force 1 was the first ever basketball shoe to feature Nike Air technology, revolutionizing the game and sneaker culture forever.",
                     Price = 5.90m,
                     Weight = 350,
-                    Image = "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX3469401.jpg",
-                    CategoryId = categoriesService.FindByName("Vegetarian").Id,
-                    Ingredients = (await ingredientsService.All())
-                        .Where(i => margheritaIngredients.Contains(i.Name))
+                    Image = "https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/up7tdgif09cvhfiuxtta/air-force-1-07-womens-shoe-KyTwDPGG.jpg",
+                    CategoryId = categoriesService.FindByName("Nike").Id,
+                    Ingredients = (await ingredientsService
+                        .All())
+                        .Where(i => nikeIngredients.Contains(i.Name))
                         .Select(i => new IngredientDto { Id = i.Id, Name = i.Name })
                         .ToList()
                 };
-                products.Add(margherita);
+                products.Add(nike);
 
-                var pepperoniIngredients = new string[] { "olive oil", "pepperoni salami", "yellow cheese", "tomato sauce", "oregano" };
-                var pepperoni = new ProductDto
+                var adidasIngredients = new string[] { "primeknit", "sock-like", "boost", "rubber" };
+                var adidas = new ProductDto
                 {
-                    Name = "Pepperoni",
-                    Description = "Pepperoni is an American variety of salami, made from cured pork and beef mixed together and seasoned with paprika or other chili pepper.",
+                    Name = "Adidas Human Race",
+                    Description = "The Adidas Pharrell Williams Human Race NMD is crafted with a breathable Primeknit upper, sock-like construction, energy-returning Boost technology, and a rubber outsole.",
                     Price = 9.90m,
                     Weight = 500,
-                    Image = "https://pizzamuensingen.ch/wp-content/uploads/2017/10/pizza_adven_zestypepperoni.png",
-                    CategoryId = categoriesService.FindByName("American").Id,
-                    Ingredients = (await ingredientsService.All())
-                        .Where(i => pepperoniIngredients.Contains(i.Name))
+                    Image = "https://www.festivalwalkmall.com/image/cache/catalog/NMD/AC7359/2-1300x1300.jpg",
+                    CategoryId = categoriesService.FindByName("Adidas").Id,
+                    Ingredients = (await ingredientsService
+                        .All())
+                        .Where(i => adidasIngredients.Contains(i.Name))
                         .Select(i => new IngredientDto { Id = i.Id, Name = i.Name })
                         .ToList()
                 };
-                products.Add(pepperoni);
+                products.Add(adidas);
 
-                var calzoneIngredients = new string[] { "ham", "traditional bulgarian flat sausage called lukanka",
-                    "mushrooms", "yellow cheese", "smoked cheese", "mozzarella", "tomato sauce" };
-                var calzone = new ProductDto
+                var pumaIngredients = new string[] { "leather", "cloth", "rubber", "suede" };
+                var puma = new ProductDto
                 {
-                    Name = "Calzone",
-                    Description = "A calzone is an Italian oven-baked folded pizza that originated in Naples. A typical calzone is made from salted bread dough, stuffed with salami, ham, vegetables, mozzarella, Parmesan and an egg.",
+                    Name = "Puma Classic",
+                    Description = "The PUMA Suede is definitely the most well-known and popular of all PUMA shoes and rightly deserves its place in every Hall of Fame.",
                     Price = 11.90m,
                     Weight = 500,
-                    Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGOxB3Fe3lAvkYQBdWrzp8885FC2uAH5nlZo-ZO21TkmxO5wa_",
-                    CategoryId = categoriesService.FindByName("Italian").Id,
-                    Ingredients = (await ingredientsService.All())
-                        .Where(i => calzoneIngredients.Contains(i.Name))
+                    Image = "https://www.dressinn.com/f/128/1283869/puma-suede-classic.jpg",
+                    CategoryId = categoriesService.FindByName("Puma").Id,
+                    Ingredients = (await ingredientsService
+                        .All())
+                        .Where(i => pumaIngredients.Contains(i.Name))
                         .Select(i => new IngredientDto { Id = i.Id, Name = i.Name })
                         .ToList()
                 };
-                products.Add(calzone);
+                products.Add(puma);
 
-                var polloIngredients = new string[] { "chicken roll", "corn",
-                    "red peppers", "yellow cheese", "smoked cheese", "tomato sauce" };
-                var pollo = new ProductDto
+                var newbalanceIngredients = new string[] { "leather", "cloth", "rubber", "suede" };
+                var newbalance = new ProductDto
                 {
-                    Name = "Pollo",
-                    Description = "Pollo might be your choice when you are in the mood for something healthy. Tender grilled chicken, creamy feta, roasted red peppers and corn are generously piled on top of our famous tomato sauce.",
+                    Name = "New Balance 997S Bodega No Bad Days",
+                    Description = "(NB), best known as simply New Balance, is an American multinational corporation based in the Boston, Massachusetts area. The company was founded in 1906 as the New Balance Arch Support Company and is one of the world's major sports footwear and apparel manufacturers.",
                     Price = 10.90m,
                     Weight = 550,
-                    Image = "http://www.ilforno.bg/45-large_default/polo.jpg",
-                    CategoryId = categoriesService.FindByName("Italian").Id,
-                    Ingredients = (await ingredientsService.All())
-                        .Where(i => polloIngredients.Contains(i.Name))
+                    Image = "http://www.thedopeuniversity.com/wp-content/uploads/2019/08/bodega-new-balance-1.jpg",
+                    CategoryId = categoriesService.FindByName("New Balance").Id,
+                    Ingredients = (await ingredientsService
+                        .All())
+                        .Where(i => newbalanceIngredients.Contains(i.Name))
                         .Select(i => new IngredientDto { Id = i.Id, Name = i.Name })
                         .ToList()
                 };
-                products.Add(pollo);
+                products.Add(newbalance);
 
-                var diabloIngredients = new string[] { "ham", "mushrooms",
-                    "hot peppers", "yellow cheese", "tomato sauce", "olive oil" };
-                var diablo = new ProductDto
+                var jordanIngredients = new string[] { "leather", "cloth", "rubber" };
+                var jordan = new ProductDto
                 {
-                    Name = "Diablo",
-                    Description = "Pizza diavola means the devils pizza and is quite a spicy little devil and one of my favourite pizzas. If you like spicy hot and chilli flavours you will enjoy this pizza.",
+                    Name = "Air Jordan 1 Bred",
+                    Description = "Air Jordan is a brand of basketball shoes, athletic, casual, and style clothing produced by Nike.",
                     Price = 8.90m,
                     Weight = 500,
-                    Image = "https://images.pizza33.ua/products/product/yQfkJqZweoLn9omo68oz5BnaGzaIE0UJ.jpg",
-                    CategoryId = categoriesService.FindByName("Premium").Id,
-                    Ingredients = (await ingredientsService.All())
-                        .Where(i => diabloIngredients.Contains(i.Name))
+                    Image = "https://cdn.thesolesupplier.co.uk/2018/02/Jordan-1-Bred-Toe-555088-610-1.png",
+                    CategoryId = categoriesService.FindByName("Air Jordan").Id,
+                    Ingredients = (await ingredientsService
+                        .All())
+                        .Where(i => jordanIngredients.Contains(i.Name))
                         .Select(i => new IngredientDto { Id = i.Id, Name = i.Name })
                         .ToList()
                 };
-                products.Add(diablo);
+                products.Add(jordan);
 
-                var californiaIngredients = new string[] { "chicken", "avocado",
-                    "olives", "yellow cheese", "pineapple", "tomato sauce" };
-                var california = new ProductDto
+                var asicsIngredients = new string[] { "leather", "cloth", "rubber" };
+                var asics = new ProductDto
                 {
-                    Name = "California",
-                    Description = "California pizza is a style of single-serving pizza that combines New York and Italian thin crust with toppings from the California cuisine cooking style.",
+                    Name = "ASICS Gel-Kayano Trainer",
+                    Description = "Asics (アシックス Ashikkusu) is a Japanese multinational corporation which produces footwear and sports equipment designed for a wide range of sports,",
                     Price = 13.90m,
                     Weight = 400,
-                    Image = "https://s3-us-west-2.amazonaws.com/craftcms-pizzaranch/general-uploads/Menu-Images/_960x800_crop_center-center/California_Chicken.png?mtime=20171002081409",
-                    CategoryId = categoriesService.FindByName("American").Id,
-                    Ingredients = (await ingredientsService.All())
-                        .Where(i => californiaIngredients.Contains(i.Name))
+                    Image = "http://kicksdeals.com/wp-content/uploads/2014/07/asics-gel-kayano-white-black-purple-1.jpg",
+                    CategoryId = categoriesService.FindByName("Asics").Id,
+                    Ingredients = (await ingredientsService
+                        .All())
+                        .Where(i => asicsIngredients.Contains(i.Name))
                         .Select(i => new IngredientDto { Id = i.Id, Name = i.Name })
                         .ToList()
                 };
-                products.Add(california);
+                products.Add(asics);
 
-                var fourCheesesIngredients = new string[] { "white bulgarian cheese", "blue cheese",
-                    "smoked cheese", "yellow cheese", "tomato sauce" };
-                var fourCheeses = new ProductDto
+                var converseIngredients = new string[] { "leather", "cloth", "rubber" };
+                var converse = new ProductDto
                 {
-                    Name = "Four Cheeses",
-                    Description = "Pizza cheese encompasses several varieties and types of cheeses and dairy products. These include processed and modified cheese such as mozzarella-like processed cheeses and mozzarella variants.",
+                    Name = "Converse 1970s",
+                    Description = "Chuck Taylor All-Stars or Converse All Stars is a model of casual shoe manufactured by Converse that was initially developed as a basketball shoe in the early.",
                     Price = 9.80m,
                     Weight = 500,
-                    Image = "https://thumbs.dreamstime.com/b/four-cheese-pizza-mozzarella-cheese-dorblu-cheddar-cheese-parmesan-cheese-isolated-white-background-91847479.jpg",
-                    CategoryId = categoriesService.FindByName("Vegetarian").Id,
-                    Ingredients = (await ingredientsService.All())
-                        .Where(i => fourCheesesIngredients.Contains(i.Name))
+                    Image = "https://images-na.ssl-images-amazon.com/images/I/71N5CqY9stL._UL1500_.jpg",
+                    CategoryId = categoriesService.FindByName("Converse").Id,
+                    Ingredients = (await ingredientsService
+                        .All())
+                        .Where(i => converseIngredients.Contains(i.Name))
                         .Select(i => new IngredientDto { Id = i.Id, Name = i.Name })
                         .ToList()
                 };
-                products.Add(fourCheeses);
+                products.Add(converse);
 
-                var tunaIngredients = new string[] { "philadelphia", "tuna fish",
-                    "white pepper", "yellow cheese", "cherry tomatoes", "basil chips", "olives" };
-                var tuna = new ProductDto
+                var vansIngredients = new string[] { "leather", "cloth", "rubber", "suede" };
+                var vans = new ProductDto
                 {
-                    Name = "Tuna",
-                    Description = "If you like tuna you should try this tuna and red onion pizza. Thin crust with tuna, red onion flavor, black olives and fresh basil leaves makes it one delightful meal.",
+                    Name = "Vans old skool vault",
+                    Description = "Vans is an American manufacturer of skateboarding shoes and related apparel, based in Santa Ana, California and owned by VF Corporation.",
                     Price = 16.70m,
                     Weight = 420,
-                    Image = "https://www.pizzaexpress.com.my/wp-content/uploads/2017/06/tuna.png",
-                    CategoryId = categoriesService.FindByName("Premium").Id,
-                    Ingredients = (await ingredientsService.All())
-                        .Where(i => tunaIngredients.Contains(i.Name))
+                    Image = "https://cdn.shopify.com/s/files/1/1853/3317/products/Vans-Vault-OG-Old-Skool-LX-Black-1-1024x1024_1024x1024_8481f3a4-4a41-481b-931b-3b17e268e68e_2048x.jpg?v=1543224437",
+                    CategoryId = categoriesService.FindByName("Vans").Id,
+                    Ingredients = (await ingredientsService
+                        .All())
+                        .Where(i => vansIngredients.Contains(i.Name))
                         .Select(i => new IngredientDto { Id = i.Id, Name = i.Name })
                         .ToList()
                 };
-                products.Add(tuna);
+                products.Add(vans);
 
-                var quattroStagioniIngredients = new string[] { "tomato sauce", "chorizo",
-                    "proschuitto", "chicken roll", "bacon", "corn", "eggs", "yellow cheese", "red onion" };
-                var quattroStagioni = new ProductDto
+                var underArmourIngredients = new string[] { "leather", "cloth", "rubber", "suede", "plastic" };
+                var underArmour = new ProductDto
                 {
-                    Name = "Quattro Stagioni",
-                    Description = "Pizza quattro stagioni is a variety of pizza in Italian cuisine that is prepared in four sections with diverse ingredients, with each section representing one season of the year.",
-                    Price = 13.10m,
-                    Weight = 500,
-                    Image = "http://www.svila.it/php/components/com_virtuemart/shop_image/product/Pizza_Quattro_st_4d1c68920ee08.jpg",
-                    CategoryId = categoriesService.FindByName("Italian").Id,
-                    Ingredients = (await ingredientsService.All())
-                        .Where(i => quattroStagioniIngredients.Contains(i.Name))
-                        .Select(i => new IngredientDto { Id = i.Id, Name = i.Name })
-                        .ToList()
-                };
-                products.Add(quattroStagioni);
-
-                var ratatouilleIngredients = new string[] { "tomato sauce", "red onion", "red peppers", "olives", "yellow cheese" };
-                var ratatouille = new ProductDto
-                {
-                    Name = "Ratatouille",
-                    Description = "The ratatouille pizza is packed full of summer vegetables. We piled them high on a whole wheat pizza crust and sprinkled it all with cheese.",
+                    Name = "Under Armour Curry 7",
+                    Description = "Under Armour, Inc. is an American company that manufactures footwear, sports, and casual apparel.",
                     Price = 9.90m,
                     Weight = 420,
-                    Image = "https://previews.123rf.com/images/eivaisla/eivaisla1611/eivaisla161100003/66411516-delicious-vegetarian-pizza-isolated-on-white-background-high-angle-shot-.jpg",
-                    CategoryId = categoriesService.FindByName("Premium").Id,
-                    Ingredients = (await ingredientsService.All())
-                        .Where(i => ratatouilleIngredients.Contains(i.Name))
+                    Image = "https://images.solecollector.com/images/fl_lossy,q_auto/actzsiekudsqwvxworns/under-armour-curry-7-undrtd-lateral",
+                    CategoryId = categoriesService.FindByName("Under Armour").Id,
+                    Ingredients = (await ingredientsService
+                        .All())
+                        .Where(i => underArmourIngredients.Contains(i.Name))
                         .Select(i => new IngredientDto { Id = i.Id, Name = i.Name })
                         .ToList()
                 };
-                products.Add(ratatouille);
-
-                var doubleEggsIngredients = new string[] { "tomato sauce", "red onion", "red peppers", "olives", "yellow cheese" };
-                var doubleEggs = new ProductDto
-                {
-                    Name = "Double Eggs",
-                    Description = "Switch it up! Have pizza at breakfast. Ripe tomatoes, fresh parsley, ham, and double eggs make for a filling start to your day.",
-                    Price = 9.90m,
-                    Weight = 500,
-                    Image = "https://us.123rf.com/450wm/deyanarobova/deyanarobova1609/deyanarobova160900037/69702341-pizza-on-a-white-background-with-eggs-ham-cheese-and-peppers-.jpg?ver=6",
-                    CategoryId = categoriesService.FindByName("Traditional").Id,
-                    Ingredients = (await ingredientsService.All())
-                        .Where(i => doubleEggsIngredients.Contains(i.Name))
-                        .Select(i => new IngredientDto { Id = i.Id, Name = i.Name })
-                        .ToList()
-                };
-                products.Add(doubleEggs);
+                products.Add(underArmour);
 
                 await productsService.CreateRangeAsync(products);
             }
 
-            await this._next(context);
+            await _next(context);
         }
     }
 }

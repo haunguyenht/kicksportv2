@@ -23,11 +23,15 @@ namespace KickSport.Web.SeedData
             {
                 await categoriesService.CreateRangeAsync(new string[]
                 {
-                    "Vegetarian",
-                    "Traditional",
-                    "Italian",
-                    "Premium",
-                    "American"
+                    "Nike",
+                    "Adidas",
+                    "Puma",
+                    "New Balance",
+                    "Air Jordan",
+                    "ASICS",
+                    "Converse",
+                    "Vans",
+                    "Under Armour"
                 });
             }
 
