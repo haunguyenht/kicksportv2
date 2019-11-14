@@ -1,34 +1,77 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module'
+import { AuthenticationModule } from './components/authentication/authentication.module'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserModule } from '@angular/platform-browser'
+import { GuardsModule } from './core/guards/guards.module'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { MDBBootstrapModule } from 'angular-bootstrap-md'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { NgModule } from '@angular/core'
+import { NgxSpinnerModule } from 'ngx-spinner'
+import { OrdersModule } from './components/orders/orders.module'
+import { ProductsModule } from './components/products/products.module'
+import { RouterModule } from '@angular/router'
+import { ServicesModule } from './core/services/services.module'
+import { SharedModule } from './components/shared/shared.module'
+import { StoreModule, ActionReducer } from '@ngrx/store'
+import { ToastrModule } from 'ngx-toastr'
 
-import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { AppComponent } from './app.component'
+import { CartComponent } from './components/cart/cart.component'
+import { HomeComponent } from './components/home/home.component'
+import { MenuComponent } from './components/menu/menu.component'
+
+import { appReducers } from './core/store/app.reducers'
+import { JWTInterceptor, ErrorInterceptor } from './core/interceptors'
+
+import { AppState } from './core/store/app.state'
+import { storeLogger } from 'ngrx-store-logger'
+
+import { environment } from '../environments/environment'
+
+export function logger(reducer: ActionReducer<AppState>): any {
+  return storeLogger()(reducer)
+}
+
+export const metaReducers = environment.production ? [] : [logger]
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
+    CartComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent
+    MenuComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    AppRoutingModule,
+    AuthenticationModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    GuardsModule,
     HttpClientModule,
-    FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-    ])
+    MDBBootstrapModule.forRoot(),
+    NgbModule,
+    NgxSpinnerModule,
+    OrdersModule,
+    ProductsModule,
+    RouterModule,
+    ServicesModule,
+    SharedModule,
+    StoreModule.forRoot(appReducers, {metaReducers}),
+    ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JWTInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
