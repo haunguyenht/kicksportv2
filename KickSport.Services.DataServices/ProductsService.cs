@@ -36,7 +36,7 @@ namespace KickSport.Services.DataServices
                 .Include(p => p.Likes)
                 .ThenInclude(ul => ul.ApplicationUser)
                 .ToListAsync();
-            var productDto = _mapper.Map<IEnumerable<ProductDto>>(products).ToList();
+            var productDto = _mapper.Map<List<ProductDto>>(products).ToList();
             return productDto;
         }
 
@@ -57,7 +57,7 @@ namespace KickSport.Services.DataServices
         {
             var products = productsDto
                 .Select(pdto => _mapper.Map<Product>(pdto));
-
+     
             await _productsRepository.AddRangeAsync(products);
             await _productsRepository.SaveChangesAsync();
         }
