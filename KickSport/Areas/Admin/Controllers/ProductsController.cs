@@ -188,8 +188,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
                         }
                     }
 
-                    await _productsIngredientsService
-                        .DeleteProductIngredientsAsync(productId);
+                    await _productsIngredientsService.DeleteProductIngredientsAsync(productId);
 
                     productDto.Name = model.Name;
                     productDto.CategoryId = productCategory.Id;

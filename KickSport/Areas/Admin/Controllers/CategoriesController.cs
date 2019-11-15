@@ -38,7 +38,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
                 {
                     await _categoriesService.CreateAsync(model.Name);
 
-                    var createdCategoryDto = _categoriesService.FindByName(model.Name);
+                    var createdCategoryDto = await _categoriesService.FindByName(model.Name);
 
                     return new SuccessViewModel<CategoryViewModel>
                     {

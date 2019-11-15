@@ -30,14 +30,19 @@ namespace KickSport.Web.Areas.Admin.Controllers
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public ActionResult<IEnumerable<OrderViewModel>> Pending()
+        public async Task<ActionResult> Pending()
         {
             if (User.IsInRole("Administrator"))
             {
-                return _ordersService
-                    .GetPendingOrders()
-                    .Select(orderDto => _mapper.Map<OrderViewModel>(orderDto))
-                    .ToList();
+
+                var result = await _ordersService.GetPendingOrders();
+                var orderview = _mapper.Map<List<OrderViewModel>>(result.ToList()).ToList();
+
+                return Ok(orderview);
+                //return _ordersService
+                //    .GetPendingOrders()
+                //    .Select(orderDto => _mapper.Map<OrderViewModel>(orderDto))
+                //    .ToList();
             }
 
             return Unauthorized();
@@ -47,14 +52,19 @@ namespace KickSport.Web.Areas.Admin.Controllers
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public ActionResult<IEnumerable<OrderViewModel>> Approved()
+        public async Task<ActionResult> Approved()
         {
             if (User.IsInRole("Administrator"))
             {
-                return _ordersService
-                    .GetApprovedOrders()
-                    .Select(orderDto => _mapper.Map<OrderViewModel>(orderDto))
-                    .ToList();
+                var result = await _ordersService.GetApprovedOrders();
+                var orderview = _mapper.Map<List<OrderViewModel>>(result.ToList()).ToList();
+
+                return Ok(orderview);
+
+                //return _ordersService
+                //    .GetApprovedOrders()
+                //    .Select(orderDto => _mapper.Map<OrderViewModel>(orderDto))
+                //    .ToList();
             }
 
             return Unauthorized();

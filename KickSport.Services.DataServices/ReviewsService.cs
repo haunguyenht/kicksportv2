@@ -43,13 +43,13 @@ namespace KickSport.Services.DataServices
             return result;
         }
 
-        public List<ReviewDto> GetProductReviews(Guid productId)
+        public async Task<List<ReviewDto>> GetProductReviews(Guid productId)
         {
-            var productReviews = _reviewsRepository
+            var productReviews = await _reviewsRepository
                 .DbSet
                 .Include(r => r.Creator)
                 .Where(r => r.ProductId == productId).ToListAsync();
-            var reviewDto = _mapper.Map<List<ReviewDto>>(productReviews).ToList();
+            var reviewDto = _mapper.Map<List<ReviewDto>>(productReviews.ToList()).ToList();
             return reviewDto;
         }
 

@@ -66,9 +66,9 @@ namespace KickSport.Services.DataServices
             return existOrder != null;
         }
 
-        public IEnumerable<OrderDto> GetApprovedOrders()
+        public async Task<List<OrderDto>> GetApprovedOrders()
         {
-            var getApproveOrders = _ordersRepository
+            var getApproveOrders = await _ordersRepository
                 .DbSet
                 .Include(o => o.Creator)
                 .Include(o => o.Products)
@@ -79,22 +79,22 @@ namespace KickSport.Services.DataServices
             return ordersDto;
         }
 
-        public IEnumerable<OrderDto> GetPendingOrders()
+        public async Task<List<OrderDto>> GetPendingOrders()
         {
-            var getPedingOrders = _ordersRepository
+            var getPedingOrders = await _ordersRepository
                 .DbSet
                 .Include(o => o.Creator)
                 .Include(o => o.Products)
                 .ThenInclude(p => p.Product)
                 .Where(o => o.Status == OrderStatus.Pending)
                 .ToListAsync();
-            var ordersDto = _mapper.Map<IEnumerable<OrderDto>>(getPedingOrders).ToList();
+            var ordersDto = _mapper.Map<List<OrderDto>>(getPedingOrders).ToList();
             return ordersDto;
         }
 
-        public IEnumerable<OrderDto> GetUserOrders(string userId)
+        public async Task<List<OrderDto>> GetUserOrders(string userId)
         {
-            var getUserOrders = _ordersRepository
+            var getUserOrders = await _ordersRepository
                 .DbSet
                 .Include(o => o.Creator)
                 .Include(o => o.Products)

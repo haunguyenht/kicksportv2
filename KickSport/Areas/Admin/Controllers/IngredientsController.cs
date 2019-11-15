@@ -38,7 +38,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
                 {
                     await _ingredientsService.CreateAsync(model.Name);
 
-                    var createdIngredientDto = _ingredientsService.FindByName(model.Name);
+                    var createdIngredientDto = await _ingredientsService.FindByName(model.Name);
 
                     return new SuccessViewModel<IngredientViewModel>
                     {
