@@ -6,7 +6,7 @@ import { GuardsModule } from './core/guards/guards.module'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { MDBBootstrapModule } from 'angular-bootstrap-md'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
-import { NgModule } from '@angular/core'
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core'
 import { NgxSpinnerModule } from 'ngx-spinner'
 import { OrdersModule } from './components/orders/orders.module'
 import { ProductsModule } from './components/products/products.module'
@@ -15,6 +15,7 @@ import { ServicesModule } from './core/services/services.module'
 import { SharedModule } from './components/shared/shared.module'
 import { StoreModule, ActionReducer } from '@ngrx/store'
 import { ToastrModule } from 'ngx-toastr'
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { AppComponent } from './app.component'
 import { CartComponent } from './components/cart/cart.component'
@@ -58,8 +59,10 @@ export const metaReducers = environment.production ? [] : [logger]
     ServicesModule,
     SharedModule,
     StoreModule.forRoot(appReducers, {metaReducers}),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AngularFontAwesomeModule
   ],
+  schemas: [NO_ERRORS_SCHEMA],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

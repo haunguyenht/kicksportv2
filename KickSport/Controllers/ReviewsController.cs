@@ -49,7 +49,7 @@ namespace KickSport.Web.Controllers
                 });
             }
 
-            var result = _reviewsService.GetProductReviews(productId);
+            var result = await _reviewsService.GetProductReviews(productId);
             var reviewView = _mapper.Map<List<ReviewDto>,List<ReviewViewModel>>(result);
             return Ok(reviewView);
         }

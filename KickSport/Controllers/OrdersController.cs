@@ -82,15 +82,15 @@ namespace KickSport.Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<IEnumerable<OrderViewModel>>> My()
+        public async Task<ActionResult> My()
         {
             try
             {
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
-                return _ordersService
-                    .GetUserOrders(user.Id)
-                    .Select(orderDto => _mapper.Map<OrderViewModel>(orderDto))
-                    .ToList();
+                var myOrderDto = await _ordersService.GetUserOrders(user.Id);
+                var myOderView = _mapper.Map<List<OrderViewModel>>(myOrderDto.ToList()).ToList();
+
+                return Ok(myOderView);
             }
             catch (Exception)
             {
