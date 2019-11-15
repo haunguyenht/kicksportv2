@@ -5,7 +5,7 @@ using System.Text;
 
 namespace KickSport.Data.Models
 {
-    public class Review : BaseModel<string>
+    public class Review : BaseModel<Guid>
     {
         public string Text { get; set; }
 
@@ -13,7 +13,7 @@ namespace KickSport.Data.Models
 
         public ApplicationUser Creator { get; set; }
 
-        public string ProductId { get; set; }
+        public Guid ProductId { get; set; }
 
         public Product Product { get; set; }
 

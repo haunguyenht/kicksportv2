@@ -8,11 +8,11 @@ namespace KickSport.Services.DataServices.Contracts
 {
     public interface IOrdersService
     {
-        Task ApproveOrderAsync(string orderId);
+        Task ApproveOrderAsync(Guid orderId);
 
         Task<OrderDto> CreateOrderAsync(string userId, IEnumerable<OrderProductDto> orderProducts);
 
-        Task<bool> Exists(string orderId);
+        Task<bool> Exists(Guid orderId);
 
         IEnumerable<OrderDto> GetApprovedOrders();
 
@@ -20,6 +20,6 @@ namespace KickSport.Services.DataServices.Contracts
 
         IEnumerable<OrderDto> GetUserOrders(string userId);
 
-        Task DeleteProductOrdersAsync(string productId);
+        Task DeleteProductOrdersAsync(Guid productId);
     }
 }

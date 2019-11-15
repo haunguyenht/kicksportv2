@@ -52,7 +52,7 @@ namespace KickSport.Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult> Like(string productId)
+        public async Task<ActionResult> Like(Guid productId)
         {
             if (!await _productsService.Exists(productId))
             {
@@ -93,7 +93,7 @@ namespace KickSport.Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult> Unlike(string productId)
+        public async Task<ActionResult> Unlike(Guid productId)
         {
             if (!await _productsService.Exists(productId))
             {

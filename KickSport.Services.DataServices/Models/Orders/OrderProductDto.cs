@@ -1,8 +1,10 @@
-﻿namespace KickSport.Services.DataServices.Models.Orders
+﻿using System;
+
+namespace KickSport.Services.DataServices.Models.Orders
 {
     public class OrderProductDto
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 

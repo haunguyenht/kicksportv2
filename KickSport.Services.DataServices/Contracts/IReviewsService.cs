@@ -8,16 +8,16 @@ namespace KickSport.Services.DataServices.Contracts
 {
     public interface IReviewsService
     {
-        Task<ReviewDto> CreateAsync(string text, string creatorId, string productId);
+        Task<ReviewDto> CreateAsync(string text, string creatorId, Guid productId);
 
-        List<ReviewDto> GetProductReviews(string productId);
+        List<ReviewDto> GetProductReviews(Guid productId);
 
-        Task DeleteProductReviewsAsync(string productId);
+        Task DeleteProductReviewsAsync(Guid productId);
 
-        Task DeleteReviewAsync(string reviewId);
+        Task DeleteReviewAsync(Guid reviewId);
 
-        Task<bool> Exists(string reviewId);
+        Task<bool> Exists(Guid reviewId);
 
-        string FindReviewCreatorById(string reviewId);
+        string FindReviewCreatorById(Guid reviewId);
     }
 }

@@ -5,6 +5,7 @@ using KickSport.Web.Models.Common;
 using KickSport.Web.Models.Orders.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -64,7 +65,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult> Approve(string orderId)
+        public async Task<ActionResult> Approve(Guid orderId)
         {
             if (User.IsInRole("Administrator"))
             {

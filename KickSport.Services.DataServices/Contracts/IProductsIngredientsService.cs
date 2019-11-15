@@ -7,6 +7,6 @@ namespace KickSport.Services.DataServices.Contracts
 {
     public interface IProductsIngredientsService
     {
-        Task DeleteProductIngredientsAsync(string productId);
+        Task DeleteProductIngredientsAsync(Guid productId);
     }
 }

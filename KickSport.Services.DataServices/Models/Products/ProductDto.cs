@@ -1,12 +1,13 @@
 ﻿using KickSport.Data.Models;
 using KickSport.Services.DataServices.Models.Categories;
 using KickSport.Services.DataServices.Models.Ingredients;
+using System;
 using System.Collections.Generic;
 namespace KickSport.Services.DataServices.Models.Products
 {
     public class ProductDto
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 
@@ -18,7 +19,7 @@ namespace KickSport.Services.DataServices.Models.Products
 
         public string Image { get; set; }
 
-        public int CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
 
         public CategoryDto Category { get; set; }
 

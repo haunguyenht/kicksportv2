@@ -5,7 +5,7 @@ using System.Text;
 
 namespace KickSport.Data.Models
 {
-    public class Ingredient : BaseModel<int>
+    public class Ingredient : BaseModel<Guid>
     {
         public string Name { get; set; }
 

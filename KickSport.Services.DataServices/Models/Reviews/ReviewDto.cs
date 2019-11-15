@@ -4,7 +4,7 @@
 
     public class ReviewDto
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         public string ReviewText { get; set; }
 

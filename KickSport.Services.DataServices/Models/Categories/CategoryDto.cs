@@ -1,8 +1,10 @@
-﻿namespace KickSport.Services.DataServices.Models.Categories
+﻿using System;
+
+namespace KickSport.Services.DataServices.Models.Categories
 {
     public class CategoryDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
     }

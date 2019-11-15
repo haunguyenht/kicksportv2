@@ -7,7 +7,7 @@ namespace KickSport.Web.Models.Orders.InputModels
     public class OrderProductInputModel
     {
         [Required]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         public string Name { get; set; }

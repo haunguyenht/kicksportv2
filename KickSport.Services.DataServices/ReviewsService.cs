@@ -25,7 +25,7 @@ namespace KickSport.Services.DataServices
             _mapper = mapper;
         }
 
-        public async Task<ReviewDto> CreateAsync(string text, string creatorId, string productId)
+        public async Task<ReviewDto> CreateAsync(string text, string creatorId, Guid productId)
         {
             var review = new Review
             {
@@ -43,7 +43,7 @@ namespace KickSport.Services.DataServices
             return result;
         }
 
-        public List<ReviewDto> GetProductReviews(string productId)
+        public List<ReviewDto> GetProductReviews(Guid productId)
         {
             var productReviews = _reviewsRepository
                 .DbSet
@@ -53,7 +53,7 @@ namespace KickSport.Services.DataServices
             return reviewDto;
         }
 
-        public async Task DeleteProductReviewsAsync(string productId)
+        public async Task DeleteProductReviewsAsync(Guid productId)
         {
             var reviews = _reviewsRepository
                 .DbSet
@@ -67,7 +67,7 @@ namespace KickSport.Services.DataServices
             }
         }
 
-        public async Task DeleteReviewAsync(string reviewId)
+        public async Task DeleteReviewAsync(Guid reviewId)
         {
             var review = _reviewsRepository
                 .DbSet
@@ -77,14 +77,14 @@ namespace KickSport.Services.DataServices
             await _reviewsRepository.SaveChangesAsync();
         }
 
-        public async Task<bool> Exists(string reviewId)
+        public async Task<bool> Exists(Guid reviewId)
         {
             var review = await _reviewsRepository.FindOneAsync(r => r.Id == reviewId);
 
             return review != null;
         }
 
-        public string FindReviewCreatorById(string reviewId)
+        public string FindReviewCreatorById(Guid reviewId)
         {
             return _reviewsRepository
                 .DbSet

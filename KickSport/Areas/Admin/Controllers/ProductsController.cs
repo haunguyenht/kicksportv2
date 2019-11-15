@@ -70,7 +70,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
                     });
                 }
 
-                var productCategory = _categoriesService.FindByName(model.Category);
+                var productCategory = await _categoriesService.FindByName(model.Category);
                 if (productCategory != null)
                 {
                     var ingredients = new List<IngredientDto>();
@@ -144,7 +144,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<SuccessViewModel<ProductViewModel>>> Put([FromRoute] string productId, [FromBody] ProductInputModel model)
+        public async Task<ActionResult<SuccessViewModel<ProductViewModel>>> Put([FromRoute] Guid productId, [FromBody] ProductInputModel model)
         {
             if (User.IsInRole("Administrator"))
             {
@@ -156,7 +156,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
                     });
                 }
 
-                var productCategory = _categoriesService.FindByName(model.Category);
+                var productCategory = await _categoriesService.FindByName(model.Category);
                 if (productCategory != null)
                 {
                     var productDto = (await _productsService.All())
@@ -238,7 +238,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult> Delete(string productId)
+        public async Task<ActionResult> Delete(Guid productId)
         {
             if (User.IsInRole("Administrator"))
             {

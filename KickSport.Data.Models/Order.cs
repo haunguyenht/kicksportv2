@@ -6,7 +6,7 @@ using System.Text;
 
 namespace KickSport.Data.Models
 {
-    public class Order : BaseModel<string>
+    public class Order : BaseModel<Guid>
     {
         public string CreatorId { get; set; }
 

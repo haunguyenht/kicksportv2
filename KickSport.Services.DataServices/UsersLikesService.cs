@@ -18,7 +18,7 @@ namespace KickSport.Services.DataServices
             _usersLikesRepository = usersLikesRepository;
         }
 
-        public async Task CreateUserLikeAsync(string productId, string userId)
+        public async Task CreateUserLikeAsync(Guid productId, string userId)
         {
             await _usersLikesRepository.AddAsync(new UsersLikes
             {
@@ -29,7 +29,7 @@ namespace KickSport.Services.DataServices
             await _usersLikesRepository.SaveChangesAsync();
         }
 
-        public async Task DeleteProductLikesAsync(string productId)
+        public async Task DeleteProductLikesAsync(Guid productId)
         {
             var productLikes = _usersLikesRepository
                 .DbSet
@@ -43,7 +43,7 @@ namespace KickSport.Services.DataServices
             }
         }
 
-        public async Task DeleteUserLikeAsync(string productId, string userId)
+        public async Task DeleteUserLikeAsync(Guid productId, string userId)
         {
             var userLike = _usersLikesRepository
                 .DbSet

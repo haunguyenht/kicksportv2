@@ -4,7 +4,7 @@ namespace KickSport.Services.DataServices.Models.Orders
 {
     public class OrderDto
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         public string CreatorId { get; set; }
 

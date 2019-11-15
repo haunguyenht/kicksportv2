@@ -62,7 +62,7 @@ namespace KickSport.Services.DataServices
             await _productsRepository.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(string productId)
+        public async Task DeleteAsync(Guid productId)
         {
             var product = await _productsRepository
                 .FirstAsync(p => p.Id == productId);
@@ -79,7 +79,7 @@ namespace KickSport.Services.DataServices
             await _productsRepository.SaveChangesAsync();
         }
 
-        public async Task<bool> Exists(string productId)
+        public async Task<bool> Exists(Guid productId)
         {
             var existedProduct = await _productsRepository.FindOneAsync(p => p.Id == productId);
 

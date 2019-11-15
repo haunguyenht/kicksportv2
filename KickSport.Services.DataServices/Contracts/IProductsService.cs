@@ -16,10 +16,10 @@ namespace KickSport.Services.DataServices.Contracts
 
         Task CreateRangeAsync(IEnumerable<ProductDto> productsDto);
 
-        Task DeleteAsync(string productId);
+        Task DeleteAsync(Guid productId);
 
         Task EditAsync(ProductDto productDto);
 
-        Task<bool> Exists(string productId);
+        Task<bool> Exists(Guid productId);
     }
 }

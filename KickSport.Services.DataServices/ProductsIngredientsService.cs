@@ -18,7 +18,7 @@ namespace KickSport.Services.DataServices
             _productsIngredientsRepository = productsIngredientsRepository;
         }
 
-        public async Task DeleteProductIngredientsAsync(string productId)
+        public async Task DeleteProductIngredientsAsync(Guid productId)
         {
             var productIngredients = _productsIngredientsRepository
                 .DbSet

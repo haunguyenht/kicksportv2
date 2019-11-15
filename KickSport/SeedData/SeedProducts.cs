@@ -37,7 +37,7 @@ namespace KickSport.Web.SeedData
                     Price = 5.90m,
                     Weight = 350,
                     Image = "https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/up7tdgif09cvhfiuxtta/air-force-1-07-womens-shoe-KyTwDPGG.jpg",
-                    CategoryId = categoriesService.FindByName("Nike").Id,
+                    CategoryId = (await categoriesService.FindByName("Nike")).Id,
                     Ingredients = (await ingredientsService
                         .All())
                         .Where(i => nikeIngredients.Contains(i.Name))
@@ -54,7 +54,7 @@ namespace KickSport.Web.SeedData
                     Price = 9.90m,
                     Weight = 500,
                     Image = "https://www.festivalwalkmall.com/image/cache/catalog/NMD/AC7359/2-1300x1300.jpg",
-                    CategoryId = categoriesService.FindByName("Adidas").Id,
+                    CategoryId = (await categoriesService.FindByName("Adidas")).Id,
                     Ingredients = (await ingredientsService
                         .All())
                         .Where(i => adidasIngredients.Contains(i.Name))
@@ -71,7 +71,7 @@ namespace KickSport.Web.SeedData
                     Price = 11.90m,
                     Weight = 500,
                     Image = "https://www.dressinn.com/f/128/1283869/puma-suede-classic.jpg",
-                    CategoryId = categoriesService.FindByName("Puma").Id,
+                    CategoryId = (await categoriesService.FindByName("Puma")).Id,
                     Ingredients = (await ingredientsService
                         .All())
                         .Where(i => pumaIngredients.Contains(i.Name))
@@ -88,7 +88,7 @@ namespace KickSport.Web.SeedData
                     Price = 10.90m,
                     Weight = 550,
                     Image = "http://www.thedopeuniversity.com/wp-content/uploads/2019/08/bodega-new-balance-1.jpg",
-                    CategoryId = categoriesService.FindByName("New Balance").Id,
+                    CategoryId = (await categoriesService.FindByName("New Balance")).Id,
                     Ingredients = (await ingredientsService
                         .All())
                         .Where(i => newbalanceIngredients.Contains(i.Name))
@@ -105,7 +105,7 @@ namespace KickSport.Web.SeedData
                     Price = 8.90m,
                     Weight = 500,
                     Image = "https://cdn.thesolesupplier.co.uk/2018/02/Jordan-1-Bred-Toe-555088-610-1.png",
-                    CategoryId = categoriesService.FindByName("Air Jordan").Id,
+                    CategoryId = (await categoriesService.FindByName("Air Jordan")).Id,
                     Ingredients = (await ingredientsService
                         .All())
                         .Where(i => jordanIngredients.Contains(i.Name))
@@ -122,7 +122,7 @@ namespace KickSport.Web.SeedData
                     Price = 13.90m,
                     Weight = 400,
                     Image = "http://kicksdeals.com/wp-content/uploads/2014/07/asics-gel-kayano-white-black-purple-1.jpg",
-                    CategoryId = categoriesService.FindByName("Asics").Id,
+                    CategoryId = (await categoriesService.FindByName("Asics")).Id,
                     Ingredients = (await ingredientsService
                         .All())
                         .Where(i => asicsIngredients.Contains(i.Name))
@@ -139,7 +139,7 @@ namespace KickSport.Web.SeedData
                     Price = 9.80m,
                     Weight = 500,
                     Image = "https://images-na.ssl-images-amazon.com/images/I/71N5CqY9stL._UL1500_.jpg",
-                    CategoryId = categoriesService.FindByName("Converse").Id,
+                    CategoryId = (await categoriesService.FindByName("Converse")).Id,
                     Ingredients = (await ingredientsService
                         .All())
                         .Where(i => converseIngredients.Contains(i.Name))
@@ -156,7 +156,7 @@ namespace KickSport.Web.SeedData
                     Price = 16.70m,
                     Weight = 420,
                     Image = "https://cdn.shopify.com/s/files/1/1853/3317/products/Vans-Vault-OG-Old-Skool-LX-Black-1-1024x1024_1024x1024_8481f3a4-4a41-481b-931b-3b17e268e68e_2048x.jpg?v=1543224437",
-                    CategoryId = categoriesService.FindByName("Vans").Id,
+                    CategoryId = (await categoriesService.FindByName("Vans")).Id,
                     Ingredients = (await ingredientsService
                         .All())
                         .Where(i => vansIngredients.Contains(i.Name))
@@ -173,7 +173,7 @@ namespace KickSport.Web.SeedData
                     Price = 9.90m,
                     Weight = 420,
                     Image = "https://images.solecollector.com/images/fl_lossy,q_auto/actzsiekudsqwvxworns/under-armour-curry-7-undrtd-lateral",
-                    CategoryId = categoriesService.FindByName("Under Armour").Id,
+                    CategoryId = (await categoriesService.FindByName("Under Armour")).Id,
                     Ingredients = (await ingredientsService
                         .All())
                         .Where(i => underArmourIngredients.Contains(i.Name))

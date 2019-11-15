@@ -29,7 +29,7 @@ namespace KickSport.Services.DataServices
             _mapper = mapper;
         }
 
-        public async Task ApproveOrderAsync(string orderId)
+        public async Task ApproveOrderAsync(Guid orderId)
         {
             var order = await _ordersRepository.FindOneAsync(o => o.Id == orderId);
             order.Status = OrderStatus.Approved;
@@ -60,7 +60,7 @@ namespace KickSport.Services.DataServices
             return orderDto;
         }
 
-        public async Task<bool> Exists(string orderId)
+        public async Task<bool> Exists(Guid orderId)
         {
             var existOrder = await _ordersRepository.FindOneAsync(o => o.Id == orderId);
             return existOrder != null;
@@ -105,7 +105,7 @@ namespace KickSport.Services.DataServices
             return ordersDto;
         }
 
-        public async Task DeleteProductOrdersAsync(string productId)
+        public async Task DeleteProductOrdersAsync(Guid productId)
         {
             var orderProducts = _orderProductRepository
                 .DbSet

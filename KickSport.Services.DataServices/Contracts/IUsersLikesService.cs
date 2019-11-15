@@ -7,10 +7,10 @@ namespace KickSport.Services.DataServices.Contracts
 {
     public interface IUsersLikesService
     {
-        Task CreateUserLikeAsync(string productId, string userId);
+        Task CreateUserLikeAsync(Guid productId, string userId);
 
-        Task DeleteProductLikesAsync(string productId);
+        Task DeleteProductLikesAsync(Guid productId);
 
-        Task DeleteUserLikeAsync(string productId, string userId);
+        Task DeleteUserLikeAsync(Guid productId, string userId);
     }
 }

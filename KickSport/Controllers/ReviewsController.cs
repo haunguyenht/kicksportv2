@@ -39,7 +39,7 @@ namespace KickSport.Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<IEnumerable<ReviewViewModel>>> Get(string productId)
+        public async Task<ActionResult<IEnumerable<ReviewViewModel>>> Get(Guid productId)
         {
             if (!await _productsService.Exists(productId))
             {
@@ -59,7 +59,7 @@ namespace KickSport.Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<SuccessViewModel<ReviewViewModel>>> Post([FromRoute] string productId, [FromBody] CreateReviewInputModel model)
+        public async Task<ActionResult<SuccessViewModel<ReviewViewModel>>> Post([FromRoute] Guid productId, [FromBody] CreateReviewInputModel model)
         {
             if (!await _productsService.Exists(productId))
             {
@@ -94,7 +94,7 @@ namespace KickSport.Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult> Delete(string reviewId)
+        public async Task<ActionResult> Delete(Guid reviewId)
         {
             if (!await _reviewsService.Exists(reviewId))
             {

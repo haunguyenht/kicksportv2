@@ -5,9 +5,9 @@ using System.Text;
 
 namespace KickSport.Data.Models
 {
-    public class OrderProduct : BaseModel<int>
+    public class OrderProduct : BaseModel<Guid>
     {
-        public string ProductId { get; set; }
+        public Guid ProductId { get; set; }
 
         public Product Product { get; set; }
 
