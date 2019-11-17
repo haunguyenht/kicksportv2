@@ -1,62 +1,86 @@
-<div class="bs-component">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-orange">
-    <a class="navbar-brand" routerLink="/home">KickSport</a>
+<!--Navbar-->
+<mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark indigo scrolling-navbar intro-fixed-nav" [containerInside]="false">
 
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" routerLink="/home">KickSport</a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/home">Home
-          <span class="sr-only">(current)</span>
-        </a>
+        <a class="nav-link waves-light" routerLink="/home" mdbWavesEffect><mdb-icon fas icon="home"></mdb-icon> Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/menu">Menu</a>
+        <a class="nav-link waves-light" routerLink="/menu" mdbWavesEffect><mdb-icon fas icon="list-ul"></mdb-icon> Sneakers</a>
       </li>
       <li class="nav-item" *ngIf="authService.isAuthenticated() && !authService.isAdmin()">
-        <a class="nav-link" routerLink="/orders/my">My Orders</a>
+        <a class="nav-link waves-light" routerLink="/orders/my" mdbWavesEffect><mdb-icon fas icon="diagnoses"></mdb-icon> My Orders</a>
       </li>
       <li class="nav-item" *ngIf="authService.isAuthenticated() && !authService.isAdmin()">
-        <a class="nav-link" routerLink="/cart">Cart</a>
+        <a class="nav-link waves-light" routerLink="/cart" mdbWavesEffect><mdb-icon fas icon="dolly"></mdb-icon> Cart</a>
       </li>
-      <li class="nav-item dropdown" dropdown *ngIf="authService.isAuthenticated() && authService.isAdmin()">
-        <a dropdownToggle class="nav-link dropdown-toggle waves-light">
-        Products<span class="caret"></span></a>
-        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-            <a class="nav-link" routerLink="/admin/product/create">Create New Sneakers</a>
+
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" *ngIf="authService.isAuthenticated() && authService.isAdmin()" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="user"></mdb-icon> Products<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/admin/product/create">Create New Sneakers</a>
         </div>
       </li>
-      <li class="nav-item dropdown" dropdown *ngIf="authService.isAuthenticated() && authService.isAdmin()">
-        <a dropdownToggle class="nav-link dropdown-toggle waves-light">
-        Orders<span class="caret"></span></a>
-        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="nav-link" routerLink="/admin/orders/pending">Pending</a>
-          <a class="nav-link" routerLink="/admin/orders/approved">Approved</a>
-        </div>
-      </li>         
-      <li class="nav-item dropdown" dropdown *ngIf="authService.isAuthenticated() && authService.isAdmin()">
-        <a dropdownToggle class="nav-link dropdown-toggle waves-light">
-        Categories<span class="caret"></span></a>
-        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-            <a class="nav-link" routerLink="/admin/categories/add">Add Category</a>
+
+      <li class="nav-item dropdown" *ngIf="authService.isAuthenticated() && authService.isAdmin()" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="user"></mdb-icon> Orders<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/admin/orders/pending">Pending</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/admin/orders/approved">Approved</a>
         </div>
       </li>
-      <li class="nav-item dropdown" dropdown *ngIf="authService.isAuthenticated() && authService.isAdmin()">
-        <a dropdownToggle class="nav-link dropdown-toggle waves-light">
-        Ingredients<span class="caret"></span></a>
-        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-            <a class="nav-link" routerLink="/admin/ingredients/add">Add Ingredient</a>
+
+      <li class="nav-item dropdown" *ngIf="authService.isAuthenticated() && authService.isAdmin()" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="user"></mdb-icon> Categories<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/admin/categories/add">Add Category</a>
         </div>
       </li>
+
+      <li class="nav-item dropdown" *ngIf="authService.isAuthenticated() && authService.isAdmin()" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="user"></mdb-icon> Ingredients<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/admin/ingredients/add">Add Ingredient</a>
+        </div>
+      </li>
+
     </ul>
-    <ul class="nav navbar-nav navbar-right">
+
+    <ul class="navbar-nav ml-auto nav-flex-icons">
       <li class="nav-item" *ngIf="!authService.isAuthenticated()">
-          <a class="nav-link border-none" (click)="openLoginModal()">Login <fa-icon [icon]="faLogin"></fa-icon></a>
+        <a class="nav-link" (click)="openLoginModal()">Login<mdb-icon fas icon="sign-in-alt"></mdb-icon></a>
       </li>
+
       <li class="nav-item" *ngIf="!authService.isAuthenticated()">
-        <a class="nav-link border-none" (click)="openRegisterModal()">Register <fa-icon [icon]="faRegister"></fa-icon></a>
+        <a class="nav-link" (click)="openRegisterModal()">Register<mdb-icon fas icon="user-plus"></mdb-icon></a>
       </li>
+
       <li class="nav-item" *ngIf="authService.isAuthenticated()">
-          <a class="nav-link border-none" (click)="logout()">Logout <fa-icon [icon]="faLogout"></fa-icon></a>
+        <a class="nav-link" (click)="logout()">Logout<mdb-icon fas icon="sign-out-alt"></mdb-icon></a>
       </li>
     </ul>
-  </nav>
-</div>
+    <!-- Links -->
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+
+<div class="view intro-2">
+    <div class="full-bg-img">
+      <div class="mask flex-center rgba-blue-slight">
+      </div>
+    </div>
+  </div>
+<!--/.Navbar-->

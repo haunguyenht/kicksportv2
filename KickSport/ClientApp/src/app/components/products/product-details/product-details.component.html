@@ -1,29 +1,51 @@
-<div class="container details" *ngIf="product">
-  <div class="row space-top">
-    <div class="col-md-12">
-      <h1 class="title">{{product.name}}</h1>
-    </div>
-  </div>
-  <div class="row space-top">
-    <div class="col-md-4">
-      <div class="card text-white bg-primary">
-        <div class="card-body bg-light">
-          <blockquote class="card-blockquote">
-            <img src="{{product.image}}" alt="{{product.name}}" class="card-image" />
-          </blockquote>
+      <!-- News jumbotron -->
+      <div class="jumbotron text-center hoverable p-4" *ngIf="product" style="margin-top: 50px">
+
+        <!-- Grid row -->
+        <div class="row">
+
+          <!-- Grid column -->
+          <div class="col-md-4 offset-md-1 mx-3 my-3">
+
+            <!-- Featured image -->
+            <div class="view overlay">
+              <img src="{{product.image}}" class="img-fluid" alt="Sample image for first version of blog listing">
+              <a>
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-7 text-md-left ml-3 mt-3">
+
+            <!-- Excerpt -->
+            <a href="#!" class="green-text">
+              <h6 class="h6 pb-1"><i class="fas fa-desktop pr-1"></i> {{product.category}}</h6>
+            </a>
+
+            <h4 class="h4 mb-4">{{product.name}}</h4>
+
+            <p class="font-weight-normal">{{product.description}}</p>
+            <p class="font-weight-normal"><a><strong>Ingredients</strong></a>: {{product.ingredients.join(", ")}}</p>
+            <p class="font-weight-normal"><a><strong>Weight</strong></a>: {{product.weight}}gr</p>
+            <p class="font-weight-normal"><a><strong>Price</strong></a>: {{product.price.toFixed(2)}}$</p>
+            <p class="font-weight-normal"><a><strong>Likes</strong></a>: {{product.likes.length}} <i
+                class="fas fa-heart pink-text pr-3" aria-hidden="true"></i></p>
+
+            <button class="btn btn-primary" *ngIf="!product.likes.includes(authService.getUsername())"
+              (click)="onLikeButtonClick()"><i class="far fa-heart"></i></button>
+            <button class="btn btn-primary" *ngIf="product.likes.includes(authService.getUsername())"
+              (click)="onUnlikeButtonClick()"><i class="fas fa-heart"></i></button>
+            <button class="btn btn-success" (click)="addToCart()">Add to cart</button>
+
+          </div>
+          <!-- Grid column -->
+
         </div>
+        <!-- Grid row -->
+
       </div>
-    </div>
-    <div class="col-md-4">
-      <p><span class="light-blue-text">Category</span>: {{product.category}}</p>
-      <p><span class="light-blue-text">Ingredients</span>: {{product.ingredients.join(", ")}}</p>
-      <p><span class="light-blue-text">Description</span>: {{product.description}}</p>
-      <p><span class="light-blue-text">Weight</span>: {{product.weight}}gr</p>
-      <p><span class="light-blue-text">Price</span>: ${{product.price.toFixed(2)}}</p>
-      <p><span class="light-blue-text">Likes</span>: {{product.likes.length}}</p>
-      <button class="btn btn-primary btn-sm" *ngIf="!product.likes.includes(authService.getUsername())" (click)="onLikeButtonClick()">Like</button>
-      <button class="btn btn-primary btn-sm" *ngIf="product.likes.includes(authService.getUsername())" (click)="onUnlikeButtonClick()">Unlike</button>
-      <button class="btn btn-warning btn-sm" (click)="addToCart()">Order</button>
-    </div>
-  </div>
-</div>
+      <!-- News jumbotron -->

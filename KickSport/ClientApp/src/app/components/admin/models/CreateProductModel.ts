@@ -4,7 +4,7 @@ export class CreateProductModel {
     public category: string,
     public ingredients: string[],
     public description: string,
-    public image: string,
+    public image: File,
     public weight: number,
     public price: number ) {
   }

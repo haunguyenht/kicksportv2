@@ -32,12 +32,10 @@
     </div>
   </div>
   <div class="modal-footer">
-    <div style="margin-right: 160px;">
-      <button type="button" class="btn btn-indigo" (click)="loginWithFb()">
-        <i class="fa fa-facebook left"></i> Login with Facebook
-      </button>
+    <div style="margin-right: 200px;">
+      <button mdbBtn type="button" gradient="blue" rounded="true" mdbWavesEffect (click)="loginWithFb()">Facebook</button>
     </div>
-    <button class="btn btn-success"
+    <button mdbBtn type="button" color="info" rounded="true" mdbWavesEffect (click)="submitForm()"
     [disabled]="!loginForm.valid">
       Login
     </button>

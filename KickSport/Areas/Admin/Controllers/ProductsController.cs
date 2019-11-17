@@ -62,7 +62,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult> Post([FromBody] ProductInputModel model, IFormFile file)
+        public async Task<ActionResult> Post([FromForm] ProductInputModel model)
         {
             if (User.IsInRole("Administrator"))
             {

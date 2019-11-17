@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
 import { FormArray, FormBuilder, Validators } from '@angular/forms'
 import { Store, select } from '@ngrx/store'
 import { Subscription } from 'rxjs'
@@ -17,7 +17,12 @@ import { ProductsService } from '../../../core/services/products/products.servic
   templateUrl: './create-product.component.html',
   styleUrls: ['./create-product.component.scss']
 })
+
 export class CreateProductComponent extends BaseComponent implements OnInit {
+
+  @ViewChild('labelImport', {static: false}) labelImport: ElementRef;
+  fileToUpload: File = null;
+
   protected availableIngredients: IngredientModel[]
   protected categories: CategoryModel[]
   protected createProductForm
@@ -71,10 +76,25 @@ export class CreateProductComponent extends BaseComponent implements OnInit {
       category: [null],
       ingredients: this.fb.array([]),
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(220)]],
-      image: ['', [Validators.required, Validators.minLength(14), Validators.pattern('^(http|https):\/\/[a-zA-Z0-9]+.*$')]],
-      weight: ['', [Validators.required, Validators.min(250), Validators.max(800)]],
+      image: ['', [Validators.required]],
+      weight: ['', [Validators.required, Validators.min(250), Validators.max(10000)]],
       price: ['', [Validators.required, Validators.min(0.1)]]
     })
+  }
+
+  uploadFile(event: any) {
+    const image = (event.target as HTMLInputElement).files[0];
+    this.createProductForm.patchValue({
+      file: image
+    });
+    this.createProductForm.get('image').updateValueAndValidity();
+  };
+
+  onFileChange(files: FileList) {
+    this.labelImport.nativeElement.innerText = Array.from(files)
+      .map(f => f.name)
+      .join(', ');
+    this.fileToUpload = files.item(0);
   }
 
   addIngredient(ingredient: string) {
@@ -99,7 +119,7 @@ export class CreateProductComponent extends BaseComponent implements OnInit {
   }
 
   get image () {
-    return this.createProductForm.get('image')
+    return this.createProductForm.get('image').updateValueAndValidity();
   }
 
   get weight () {

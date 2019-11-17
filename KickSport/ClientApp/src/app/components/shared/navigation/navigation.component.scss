@@ -1,7 +1,23 @@
-.bg-orange {
-  background-color: rgb(163, 15, 15)
-}
-
 .border-none {
   outline: none !important
+}
+
+.view {
+  background: url("https://cdn-eu-ec.yottaa.net/5d38d29cd93140326b3f0b90/www.kicksusa.com/v~4b.13/media/wysiwyg/homepage-2019/Jordan-13-IslandGreen_Desktop-Banner_1500x723.jpg?yocs=1_5_")no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+}
+
+.navbar {
+  background-color: transparent;
+}
+
+.top-nav-collapse {
+  background-color: #4285F4;
+}
+
+@media only screen and (max-width: 768px) {
+  .navbar {
+      background-color: #4285F4;
+  }
 }

@@ -7,6 +7,7 @@ import { NgxSpinnerModule } from 'ngx-spinner'
 import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login'
 
 import { authenticationComponents } from '.'
+import { MDBBootstrapModule } from 'angular-bootstrap-md'
 
 const config = new AuthServiceConfig([
   {
@@ -29,7 +30,8 @@ export function provideConfig() {
     FormsModule,
     NgxSpinnerModule,
     ReactiveFormsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    MDBBootstrapModule.forRoot(),
   ],
   exports: [
     ...authenticationComponents
