@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using static KickSport.Data.Common.Constant.Constants;
@@ -20,10 +21,8 @@ namespace KickSport.Web.Areas.Models.Products.InputModels
         [StringLength(VALIDATION.DescriptionMaximumLength, MinimumLength = VALIDATION.DescriptionMinimumLength, ErrorMessage = VALIDATION.DescriptionErrorMessage)]
         public string Description { get; set; }
 
-        [Required]
-        [MinLength(VALIDATION.ImageMinimumLength, ErrorMessage = VALIDATION.ImageErrorMessage)]
-        [RegularExpression(VALIDATION.ImageRegex, ErrorMessage = VALIDATION.ImageRegexErrorMessage)]
-        public string Image { get; set; }
+
+        public IFormFile File { get; set; }
 
         [Range(VALIDATION.MinimumWeight, VALIDATION.MaximumWeight, ErrorMessage = VALIDATION.WeightErrorMessage)]
         public int Weight { get; set; }

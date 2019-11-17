@@ -6,9 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\KickSport.Data.Common\KickSport.Data.Common.csproj" />
     <ProjectReference Include="..\KickSport.Data\KickSport.Data.csproj" />
   </ItemGroup>
 

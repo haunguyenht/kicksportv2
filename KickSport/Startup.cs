@@ -1,5 +1,7 @@
 using AutoMapper;
 using KickSport.Data;
+using KickSport.Data.Common;
+using KickSport.Data.Common.Contracts;
 using KickSport.Data.Models;
 using KickSport.Data.Repository;
 using KickSport.Helpers;
@@ -95,6 +97,8 @@ namespace KickSport
             services.AddScoped<IProductsIngredientsService, ProductsIngredientsService>();
             services.AddScoped<IUsersLikesService, UsersLikesService>();
             services.AddScoped<IOrdersService, OrdersService>();
+
+            services.AddTransient<IImageWriter, ImageWriter>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();

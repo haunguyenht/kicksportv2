@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KickSport.Data.Common.Contracts;
 
 namespace KickSport.Web.Areas.Admin.Controllers
 {
@@ -29,6 +30,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
         private readonly IProductsIngredientsService _productsIngredientsService;
         private readonly IUsersLikesService _usersLikesService;
         private readonly IOrdersService _ordersService;
+        private readonly IImageWriter _imageWriter;
         private readonly IHubContext<ProductsHub, IProductsHubClient> _productsHubContext;
 
         public ProductsController(
@@ -40,6 +42,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
             IProductsIngredientsService productsIngredientsService,
             IUsersLikesService usersLikesService,
             IOrdersService ordersService,
+            IImageWriter imageWriter,
             IHubContext<ProductsHub, IProductsHubClient> productHubContext)
         {
             _mapper = mapper;
@@ -50,6 +53,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
             _productsIngredientsService = productsIngredientsService;
             _usersLikesService = usersLikesService;
             _ordersService = ordersService;
+            _imageWriter = imageWriter;
             _productsHubContext = productHubContext;
         }
 
@@ -58,7 +62,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult> Post([FromBody] ProductInputModel model)
+        public async Task<ActionResult> Post([FromBody] ProductInputModel model, IFormFile file)
         {
             if (User.IsInRole("Administrator"))
             {
@@ -95,7 +99,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
                         Name = model.Name,
                         CategoryId = productCategory.Id,
                         Description = model.Description,
-                        Image = model.Image,
+                        Image = await _imageWriter.UploadImage(model.File),
                         Weight = model.Weight,
                         Price = model.Price,
                         Ingredients = ingredients.Select(i => new IngredientDto
@@ -193,7 +197,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
                     productDto.Name = model.Name;
                     productDto.CategoryId = productCategory.Id;
                     productDto.Description = model.Description;
-                    productDto.Image = model.Image;
+                    productDto.Image = await _imageWriter.UploadImage(model.File);
                     productDto.Weight = model.Weight;
                     productDto.Price = model.Price;
                     productDto.Ingredients = ingredients.Select(i => new IngredientDto
