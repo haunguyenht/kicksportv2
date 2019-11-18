@@ -58,7 +58,7 @@
   </div>
   <div class="modal-footer">
     <button mdbBtn type="button" gradient="aqua" rounded="true" mdbWavesEffect
-    [disabled]="!registerForm.valid">
+    [disabled]="!registerForm.valid" (click)="submitForm()">
       Register
     </button>
   </div>

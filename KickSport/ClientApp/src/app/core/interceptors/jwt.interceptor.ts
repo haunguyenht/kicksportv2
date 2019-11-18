@@ -35,14 +35,14 @@ export class JWTInterceptor implements HttpInterceptor {
          || (req.url.endsWith('/categories') && req.method === 'GET')) {
       req = req.clone({
         setHeaders: {
-          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/json'
         }
       })
     } else {
       req = req.clone({
         setHeaders: {
           'Authorization': `Bearer ${this.authtoken}`,
-          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/json'
         }
       })
     }

@@ -142,10 +142,10 @@ namespace KickSport
                 .AllowCredentials()
                 .WithOrigins("http://localhost:4200"));
 
-            app.UseSeedAdmin();
-            app.UseSeedCategories();
-            app.UseSeedIngredients();
-            app.UseSeedProducts();
+            //app.UseSeedAdmin();
+            //app.UseSeedCategories();
+            //app.UseSeedIngredients();
+            //app.UseSeedProducts();
 
             app.UseAuthentication();
             app.UseAuthorization();

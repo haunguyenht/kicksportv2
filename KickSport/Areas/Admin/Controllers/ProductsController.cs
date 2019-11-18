@@ -62,7 +62,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult> Post([FromForm] ProductInputModel model)
+        public async Task<IActionResult> Post([FromForm] ProductInputModel model)
         {
             if (User.IsInRole("Administrator"))
             {
@@ -99,7 +99,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
                         Name = model.Name,
                         CategoryId = productCategory.Id,
                         Description = model.Description,
-                        Image = await _imageWriter.UploadImage(model.File),
+                        Image = await _imageWriter.UploadImage(model.Image),
                         Weight = model.Weight,
                         Price = model.Price,
                         Ingredients = ingredients.Select(i => new IngredientDto
@@ -197,7 +197,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
                     productDto.Name = model.Name;
                     productDto.CategoryId = productCategory.Id;
                     productDto.Description = model.Description;
-                    productDto.Image = await _imageWriter.UploadImage(model.File);
+                    productDto.Image = await _imageWriter.UploadImage(model.Image);
                     productDto.Weight = model.Weight;
                     productDto.Price = model.Price;
                     productDto.Ingredients = ingredients.Select(i => new IngredientDto
