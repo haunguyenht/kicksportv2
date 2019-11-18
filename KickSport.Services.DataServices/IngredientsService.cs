@@ -30,7 +30,7 @@ namespace KickSport.Services.DataServices
         public async Task<List<IngredientDto>> All()
         {
             var ingredient = await _ingredientsRepository.GetAllAsync();
-            var ingredientDto = _mapper.Map<IEnumerable<IngredientDto>>(ingredient.ToList()).OrderBy(i => i.Name).ToList();
+            var ingredientDto = _mapper.Map<List<IngredientDto>>(ingredient.ToList()).OrderBy(i => i.Name).ToList();
             return ingredientDto;
         }
 

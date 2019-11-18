@@ -5,7 +5,7 @@ export class ProductModel {
   public name: string
   public category: string
   public description: string
-  public image: string
+  public image: File
   public price: number
   public weight: number
   public ingredients: Array<string>

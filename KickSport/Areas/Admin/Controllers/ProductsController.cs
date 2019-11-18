@@ -62,7 +62,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> Post([FromForm] ProductInputModel model)
+        public async Task<ActionResult> Post([FromForm] ProductInputModel model)
         {
             if (User.IsInRole("Administrator"))
             {
@@ -148,93 +148,56 @@ namespace KickSport.Web.Areas.Admin.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<SuccessViewModel<ProductViewModel>>> Put([FromRoute] Guid productId, [FromBody] ProductInputModel model)
+        public async Task<ActionResult<SuccessViewModel<ProductViewModel>>> Put([FromRoute] Guid productId, [FromForm] ProductInputModel model)
         {
             if (User.IsInRole("Administrator"))
             {
-                if (!await _productsService.Exists(productId))
+                var productDto = (await _productsService.All())
+                    .First(p => p.Id == productId);
+                var productCategory = await _categoriesService.FindByName(model.Category);
+                var ingredients = new List<IngredientDto>();
+                foreach (var ingredientName in model.Ingredients)
+                {
+                    var ingredient = await _ingredientsService.FindByName(ingredientName);
+                    ingredients.Add(ingredient);
+                }
+                productDto.Name = model.Name;
+                productDto.CategoryId = productCategory.Id;
+                productDto.Description = model.Description;
+                productDto.Image = await _imageWriter.UploadImage(model.Image);
+                productDto.Weight = model.Weight;
+                productDto.Price = model.Price;
+                productDto.Ingredients = ingredients.Select(i => new IngredientDto
+                {
+                    Id = i.Id,
+                    Name = i.Name
+                }).ToList();
+                try
+                {
+                    await _productsService.EditAsync(productDto);
+                    var editedProductDto = (await _productsService.All())
+                        .First(p => p.Name == productDto.Name);
+
+                    return new SuccessViewModel<ProductViewModel>
+                    {
+                        Data = _mapper.Map<ProductViewModel>(editedProductDto),
+                        Message = "Product edited successfully."
+                    };
+                }
+                catch (Exception ex)
                 {
                     return BadRequest(new BadRequestViewModel
                     {
-                        Message = "Product with the given id does not exist."
+                        Message = "Something went wrong."
                     });
                 }
-
-                var productCategory = await _categoriesService.FindByName(model.Category);
-                if (productCategory != null)
-                {
-                    var productDto = (await _productsService.All())
-                        .First(p => p.Id == productId);
-
-                    if (productDto.Name != model.Name && (await _productsService.All())
-                        .Any(p => p.Name == model.Name))
-                    {
-                        return BadRequest(new BadRequestViewModel
-                        {
-                            Message = "Product with the given name already exists."
-                        });
-                    }
-
-                    var ingredients = new List<IngredientDto>();
-                    foreach (var ingredientName in model.Ingredients)
-                    {
-                        var ingredient = await _ingredientsService.FindByName(ingredientName);
-                        if (ingredient != null)
-                        {
-                            ingredients.Add(ingredient);
-                        }
-                        else
-                        {
-                            return BadRequest(new BadRequestViewModel
-                            {
-                                Message = $"{ingredientName} ingredient not found."
-                            });
-                        }
-                    }
-
-                    await _productsIngredientsService.DeleteProductIngredientsAsync(productId);
-
-                    productDto.Name = model.Name;
-                    productDto.CategoryId = productCategory.Id;
-                    productDto.Description = model.Description;
-                    productDto.Image = await _imageWriter.UploadImage(model.Image);
-                    productDto.Weight = model.Weight;
-                    productDto.Price = model.Price;
-                    productDto.Ingredients = ingredients.Select(i => new IngredientDto
-                    {
-                        Id = i.Id,
-                        Name = i.Name
-                    }).ToList();
-
-                    try
-                    {
-                        await _productsService.EditAsync(productDto);
-                        var editedProductDto = (await _productsService.All())
-                            .First(p => p.Name == productDto.Name);
-
-                        return new SuccessViewModel<ProductViewModel>
-                        {
-                            Data = _mapper.Map<ProductViewModel>(editedProductDto),
-                            Message = "Product edited successfully."
-                        };
-                    }
-                    catch (Exception)
-                    {
-                        return BadRequest(new BadRequestViewModel
-                        {
-                            Message = "Something went wrong."
-                        });
-                    }
-                }
-
-                return BadRequest(new BadRequestViewModel
-                {
-                    Message = "Category not found."
-                });
             }
-
-            return Unauthorized();
+            return BadRequest(new BadRequestViewModel
+            {
+                Message = "Category not found."
+            });
         }
+
 
         [HttpDelete("{productId}")]
         [ProducesDefaultResponseType]

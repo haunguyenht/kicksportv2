@@ -43,7 +43,7 @@ namespace KickSport
                     Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddAutoMapper(typeof(MappingConfiguration));
+            RegisterServices(services);
 
             var facebookSettingsSection = Configuration.GetSection("FacebookSettings");
             services.Configure<FacebookSettings>(facebookSettingsSection);
@@ -89,14 +89,7 @@ namespace KickSport
             services.AddCors();
             services.AddSignalR();
 
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<ICategoriesService, CategoriesService>();
-            services.AddScoped<IIngredientsService, IngredientsService>();
-            services.AddScoped<IProductsService, ProductsService>();
-            services.AddScoped<IReviewsService, ReviewsService>();
-            services.AddScoped<IProductsIngredientsService, ProductsIngredientsService>();
-            services.AddScoped<IUsersLikesService, UsersLikesService>();
-            services.AddScoped<IOrdersService, OrdersService>();
+            
 
             services.AddTransient<IImageWriter, ImageWriter>();
 
@@ -142,10 +135,10 @@ namespace KickSport
                 .AllowCredentials()
                 .WithOrigins("http://localhost:4200"));
 
-            //app.UseSeedAdmin();
-            //app.UseSeedCategories();
-            //app.UseSeedIngredients();
-            //app.UseSeedProducts();
+            app.UseSeedAdmin();
+            app.UseSeedCategories();
+            app.UseSeedIngredients();
+            app.UseSeedProducts();
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -178,6 +171,21 @@ namespace KickSport
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+        }
+        private IServiceCollection RegisterServices(IServiceCollection services)
+        {
+            services.AddAutoMapper(typeof(MappingConfiguration));
+
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<ICategoriesService, CategoriesService>();
+            services.AddScoped<IIngredientsService, IngredientsService>();
+            services.AddScoped<IProductsService, ProductsService>();
+            services.AddScoped<IReviewsService, ReviewsService>();
+            services.AddScoped<IProductsIngredientsService, ProductsIngredientsService>();
+            services.AddScoped<IUsersLikesService, UsersLikesService>();
+            services.AddScoped<IOrdersService, OrdersService>();
+
+            return services;
         }
     }
 }

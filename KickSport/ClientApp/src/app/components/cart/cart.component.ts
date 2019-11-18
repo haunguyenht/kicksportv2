@@ -8,6 +8,7 @@ import { BaseComponent } from '../base.component'
 import { ProductInCartModel } from './models/ProductInCartModel'
 import { SyncCart, RemoveFromCart } from '../../core/store/cart/cart.actions'
 import { OrdersService } from '../../core/services/orders/orders.service'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-cart',
@@ -19,10 +20,11 @@ export class CartComponent extends BaseComponent implements OnInit {
   protected products: ProductInCartModel[]
   protected totalSum: number
   private subscription$: Subscription
+  imageUrl: string;
 
   constructor(
     private store: Store<AppState>,
-    private ordersService: OrdersService ) {
+    private ordersService: OrdersService) {
     super()
   }
 
@@ -53,6 +55,8 @@ export class CartComponent extends BaseComponent implements OnInit {
       })
 
     this.subscriptions.push(this.subscription$)
+    const loginUrl = environment.images;
+    this.imageUrl = loginUrl;
   }
 
   onQuantChange(event, id) {

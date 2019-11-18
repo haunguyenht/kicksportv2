@@ -101,7 +101,7 @@ namespace KickSport.Services.DataServices
                 .ThenInclude(p => p.Product)
                 .Where(o => o.CreatorId == userId)
                 .ToListAsync();
-            var ordersDto = _mapper.Map<IEnumerable<OrderDto>>(getUserOrders).ToList();
+            var ordersDto = _mapper.Map<List<OrderDto>>(getUserOrders).ToList();
             return ordersDto;
         }
 

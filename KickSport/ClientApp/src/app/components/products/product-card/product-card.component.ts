@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { ProductModel } from '../models/ProductModel'
 import { Router } from '@angular/router'
@@ -9,6 +9,7 @@ import { AppState } from '../../../core/store/app.state'
 import { AuthenticationService } from '../../../core/services/authentication/authentication.service'
 import { CartProductModel } from '../../../core/models/CartProductModel'
 import { ProductDeleteModalComponent } from '../product-delete-modal/product-delete-modal.component'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-product-card',
@@ -17,19 +18,23 @@ import { ProductDeleteModalComponent } from '../product-delete-modal/product-del
 })
 export class ProductCardComponent {
   @Input() protected product: ProductModel
+  imageUrl: string;
 
-  constructor (
+  constructor(
     protected authService: AuthenticationService,
     private store: Store<AppState>,
     private router: Router,
     private modalService: NgbModal) { }
 
-  addToCart () {
+  ngOnInit() {
+    const loginUrl = environment.images
+    this.imageUrl = loginUrl;
+  }
+  addToCart() {
     if (!this.authService.isAuthenticated()) {
       this.router.navigate(['/cart'])
       return
     }
-
     const productToAdd = new CartProductModel(
       this.product.id,
       this.product.name,

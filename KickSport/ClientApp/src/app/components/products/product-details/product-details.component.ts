@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 
 import { AddToCart } from '../../../core/store/cart/cart.actions'
@@ -8,6 +8,7 @@ import { CartProductModel } from '../../../core/models/CartProductModel'
 import { ProductModel } from '../models/ProductModel'
 import { ProductsService } from '../../../core/services/products/products.service'
 import { Router } from '@angular/router'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-product-details',
@@ -16,13 +17,18 @@ import { Router } from '@angular/router'
 })
 export class ProductDetailsComponent {
   @Input() protected product: ProductModel
+  imageUrl: string;
 
-  constructor (
+  constructor(
     protected authService: AuthenticationService,
     private productsService: ProductsService,
     private store: Store<AppState>,
-    private router: Router ) { }
+    private router: Router) { }
 
+  ngOnInit() {
+    const loginUrl = environment.images
+    this.imageUrl = loginUrl;
+  }
   addToCart() {
     const productToAdd = new CartProductModel(
       this.product.id,

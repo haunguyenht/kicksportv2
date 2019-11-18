@@ -13,7 +13,7 @@
       <tr [@products] *ngFor="let pr of products; trackBy: trackByIds">
        <td data-th="Product">
           <div class="row">
-            <div class="col-sm-4 hidden-xs"><img src="{{pr.image}}" alt="..." class="cart-image" /></div>
+            <div class="col-sm-4 hidden-xs"><img src="{{imageUrl}}{{pr.image}}" alt="..." class="cart-image" /></div>
             <div class="col-sm-8">
               <h4 class="nomargin">{{pr.name}}</h4>
               <p>{{pr.ingredients.join(', ')}}</p>

@@ -4,7 +4,7 @@
       <h1 class="title">Edit Sneakers</h1>
     </div>
   </div>
-  <form [formGroup]="editForm" (ngSubmit)="edit()">
+  <form [formGroup]="editForm" (ngSubmit)="edit()" enctype="multipart/form-data">
     <div class="row space-top">
       <div class="col-md-5">
         <div class="form-group">
@@ -80,24 +80,17 @@
             </div>
         </div>
         <div class="form-group">
-          <label class="form-control-label" for="image">Image URL</label>
-          <input
-            type="text"
-            class="form-control" 
-            id="image" 
-            formControlName="image"
-            [ngClass]="{ 'is-invalid': image.touched && image.errors }" />
+          <label class="form-control-label" for="image">Image</label>
+          <!-- <input type="file" (change)="uploadFile($event)"/>
           <div *ngIf="image.errors" class="invalid-feedback">
             <div *ngIf="image.errors.required">
               Image URL is required.
             </div>
-            <div *ngIf="image.errors.minlength">
-              Image URL must be at least 14 characters long.
+          </div> -->
+          <div class="custom-file">
+              <input type="file" class="custom-file-input" multiple id="importFile" (change)="onFileChange($event.target.files)" (change)="uploadFile($event)">
+              <label class="custom-file-label" #labelImport for="importFile"><i class="fas fa-search"></i> Choose file</label>
             </div>
-            <div *ngIf="image.errors.pattern">
-              Image URL must be a valid URL address.
-            </div>
-          </div>
         </div>
         <div class="form-group">
           <label class="form-control-label" for="weight">Weight</label>
