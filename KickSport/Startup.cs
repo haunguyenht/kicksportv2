@@ -88,11 +88,7 @@ namespace KickSport
 
             services.AddCors();
             services.AddSignalR();
-
-            
-
-            services.AddTransient<IImageWriter, ImageWriter>();
-
+                   
             services.AddControllersWithViews();
             services.AddRazorPages();
             // In production, the Angular files will be served from this directory
@@ -177,6 +173,7 @@ namespace KickSport
             services.AddAutoMapper(typeof(MappingConfiguration));
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddTransient<IImageWriter, ImageWriter>();
             services.AddScoped<ICategoriesService, CategoriesService>();
             services.AddScoped<IIngredientsService, IngredientsService>();
             services.AddScoped<IProductsService, ProductsService>();
