@@ -4,7 +4,7 @@ import {
   transition,
   style,
   group
- } from '@angular/animations'
+ } from '@angular/animations';
 
 const animations =  [
   trigger('products', [
@@ -20,6 +20,6 @@ const animations =  [
       ])
     ])
   ])
-]
+];
 
-export { animations }
+export { animations };

@@ -1,5 +1,5 @@
 export default class AuthenticationDataModel {
-  constructor (
+  constructor(
     public token: string,
     public username: string,
     public isAdmin: boolean,

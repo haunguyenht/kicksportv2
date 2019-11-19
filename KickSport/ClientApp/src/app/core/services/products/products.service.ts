@@ -62,10 +62,10 @@ export class ProductsService {
       });
   }
 
-  editProduct(model: ProductModel) {
+  editProduct(id: any, model: any ) {
     this.spinner.show();
     this.http
-      .put(`${adminProductsUrl}/${model.id}`, model)
+      .put(`${adminProductsUrl}/${id}`, model)
       .subscribe((res: ResponseDataModel) => {
         const product: ProductModel = res.data;
         product.reviews = [];

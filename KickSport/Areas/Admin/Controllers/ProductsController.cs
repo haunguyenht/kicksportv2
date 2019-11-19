@@ -66,7 +66,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
         {
             if (User.IsInRole("Administrator"))
             {
-                if ((await _productsService.All()).Any(p => p.Name == model.Name))
+                if (await _productsService.ExistsName(model.Name))
                 {
                     return BadRequest(new BadRequestViewModel
                     {
@@ -112,9 +112,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
                     try
                     {
                         await _productsService.CreateAsync(productDto);
-                        var createdProductDto = (await _productsService
-                            .All())
-                            .First(p => p.Name == productDto.Name);
+                        var createdProductDto = await _productsService.GetProductByName(productDto.Name);
 
                         var createdProductViewModel = _mapper.Map<ProductViewModel>(createdProductDto);
 
@@ -152,8 +150,7 @@ namespace KickSport.Web.Areas.Admin.Controllers
         {
             if (User.IsInRole("Administrator"))
             {
-                var productDto = (await _productsService.All())
-                    .First(p => p.Id == productId);
+                var productDto = await _productsService.GetProductById(productId);
                 var productCategory = await _categoriesService.FindByName(model.Category);
                 var ingredients = new List<IngredientDto>();
                 foreach (var ingredientName in model.Ingredients)
@@ -161,6 +158,8 @@ namespace KickSport.Web.Areas.Admin.Controllers
                     var ingredient = await _ingredientsService.FindByName(ingredientName);
                     ingredients.Add(ingredient);
                 }
+                await _productsIngredientsService.DeleteProductIngredientsAsync(productId);
+
                 productDto.Name = model.Name;
                 productDto.CategoryId = productCategory.Id;
                 productDto.Description = model.Description;
@@ -175,16 +174,14 @@ namespace KickSport.Web.Areas.Admin.Controllers
                 try
                 {
                     await _productsService.EditAsync(productDto);
-                    var editedProductDto = (await _productsService.All())
-                        .First(p => p.Name == productDto.Name);
 
                     return new SuccessViewModel<ProductViewModel>
                     {
-                        Data = _mapper.Map<ProductViewModel>(editedProductDto),
+                        Data = _mapper.Map<ProductViewModel>(productDto),
                         Message = "Product edited successfully."
                     };
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return BadRequest(new BadRequestViewModel
                     {

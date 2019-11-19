@@ -1,19 +1,19 @@
-import { catchError } from 'rxjs/operators'
+import { catchError } from 'rxjs/operators';
 import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
   HttpErrorResponse
-} from '@angular/common/http'
-import { Injectable } from '@angular/core'
-import { NgxSpinnerService } from 'ngx-spinner'
-import { Observable, throwError } from 'rxjs'
-import { ToastrService } from 'ngx-toastr'
+} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Observable, throwError } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor (
+  constructor(
     private toastr: ToastrService,
     private spinner: NgxSpinnerService ) { }
 
@@ -24,23 +24,23 @@ export class ErrorInterceptor implements HttpInterceptor {
         switch (err.status) {
           case 400:
           case 404:
-            this.spinner.hide()
+            this.spinner.hide();
 
             if (err.error.errors) {
               const message = Object.keys(err.error.errors)
                 .map(e => err.error.errors[e])
-                .join('\n')
-              this.toastr.error(message, 'Warning!')
+                .join('\n');
+              this.toastr.error(message, 'Warning!');
             } else {
-              this.toastr.error(err.error.message, 'Warning!')
+              this.toastr.error(err.error.message, 'Warning!');
             }
-            break
+            break;
           case 401:
-            this.spinner.hide()
-            this.toastr.error(err.error.title, 'Warning!')
+            this.spinner.hide();
+            this.toastr.error(err.error.title, 'Warning!');
         }
 
-        return throwError(err)
-      }))
+        return throwError(err);
+      }));
   }
 }

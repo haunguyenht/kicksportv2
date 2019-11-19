@@ -21,5 +21,11 @@ namespace KickSport.Services.DataServices.Contracts
         Task EditAsync(ProductDto productDto);
 
         Task<bool> Exists(Guid productId);
+
+        Task<ProductDto> GetProductById(Guid productId);
+
+        Task<ProductDto> GetProductByName(string productName);
+
+        Task<bool> ExistsName(string productName);
     }
 }

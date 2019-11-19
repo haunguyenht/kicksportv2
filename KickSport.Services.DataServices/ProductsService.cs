@@ -85,5 +85,35 @@ namespace KickSport.Services.DataServices
 
             return existedProduct != null;
         }
+
+        public async Task<ProductDto> GetProductById(Guid productId)
+        {
+            var product = await _productsRepository.DbSet
+                .AsNoTracking()
+                .Include(p => p.Category)
+                .Include(p => p.Ingredients)
+                .FirstOrDefaultAsync(x => x.Id == productId);
+            return _mapper.Map<ProductDto>(product);
+        }
+
+        public async Task<ProductDto> GetProductByName(string productName)
+        {
+            var product = await _productsRepository.DbSet
+                .AsNoTracking()
+                .Include(p => p.Category)
+                .Include(p => p.Ingredients)
+                .ThenInclude(pi => pi.Ingredient)
+                .Include(p => p.Likes)
+                .ThenInclude(ul => ul.ApplicationUser)
+                .FirstOrDefaultAsync(x => x.Name == productName);
+            return _mapper.Map<ProductDto>(product);
+        }
+
+        public async Task<bool> ExistsName(string productName)
+        {
+            var existedProduct = await _productsRepository.FindOneAsync(p => p.Name == productName);
+
+            return existedProduct != null;
+        }
     }
 }

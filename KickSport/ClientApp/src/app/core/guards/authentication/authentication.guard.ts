@@ -3,13 +3,13 @@ import {
    ActivatedRouteSnapshot,
    RouterStateSnapshot,
    Router
-} from '@angular/router'
-import { Injectable } from '@angular/core'
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
-import { Observable } from 'rxjs'
+} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
 
-import { AuthenticationService } from '../../services/authentication/authentication.service'
-import { LoginModalComponent } from '../../../components/authentication/login-modal/login-modal.component'
+import { AuthenticationService } from '../../services/authentication/authentication.service';
+import { LoginModalComponent } from '../../../components/authentication/login-modal/login-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -26,18 +26,18 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot ): Observable<boolean> | Promise<boolean> | boolean {
 
     if (this.authService.isAuthenticated()) {
-      return true
+      return true;
     }
 
-    this.router.navigate(['/'])
-    this.openLoginModal()
-    return false
+    this.router.navigate(['/']);
+    this.openLoginModal();
+    return false;
   }
 
   openLoginModal() {
-    const loginRef = this.modalService.open(LoginModalComponent)
+    const loginRef = this.modalService.open(LoginModalComponent);
     loginRef.result.then((result) => {
     }).catch((error) => {
-    })
+    });
   }
 }

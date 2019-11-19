@@ -1,12 +1,12 @@
 export function getTotalSum(products) {
-  let total = 0
+  let total = 0;
   for (const pr of products) {
-    total += pr.price * pr.quantity
+    total += pr.price * pr.quantity;
   }
 
-  return total
+  return total;
 }
 
 export function toLocaleString(date) {
-  return new Date(date).toLocaleString()
+  return new Date(date).toLocaleString();
 }

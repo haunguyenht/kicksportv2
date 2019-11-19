@@ -1,7 +1,7 @@
-import { CommonModule } from '@angular/common'
-import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { allServices } from '.'
+import { allServices } from '.';
 
 @NgModule({
   providers: [

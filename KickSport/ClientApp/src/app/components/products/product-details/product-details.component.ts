@@ -1,14 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core'
-import { Store } from '@ngrx/store'
+import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
-import { AddToCart } from '../../../core/store/cart/cart.actions'
-import { AppState } from '../../../core/store/app.state'
-import { AuthenticationService } from '../../../core/services/authentication/authentication.service'
-import { CartProductModel } from '../../../core/models/CartProductModel'
-import { ProductModel } from '../models/ProductModel'
-import { ProductsService } from '../../../core/services/products/products.service'
-import { Router } from '@angular/router'
-import { environment } from 'src/environments/environment'
+import { AddToCart } from '../../../core/store/cart/cart.actions';
+import { AppState } from '../../../core/store/app.state';
+import { AuthenticationService } from '../../../core/services/authentication/authentication.service';
+import { CartProductModel } from '../../../core/models/CartProductModel';
+import { ProductModel } from '../models/ProductModel';
+import { ProductsService } from '../../../core/services/products/products.service';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-details',
@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment'
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent {
-  @Input() protected product: ProductModel
+  @Input() protected product: ProductModel;
   imageUrl: string;
 
   constructor(
@@ -26,7 +26,7 @@ export class ProductDetailsComponent {
     private router: Router) { }
 
   ngOnInit() {
-    const loginUrl = environment.images
+    const loginUrl = environment.images;
     this.imageUrl = loginUrl;
   }
   addToCart() {
@@ -34,17 +34,17 @@ export class ProductDetailsComponent {
       this.product.id,
       this.product.name,
       1,
-      this.product.price)
+      this.product.price);
 
-    this.store.dispatch(new AddToCart(productToAdd))
-    this.router.navigate(['/cart'])
+    this.store.dispatch(new AddToCart(productToAdd));
+    this.router.navigate(['/cart']);
   }
 
   onLikeButtonClick() {
-    this.productsService.likeProduct(this.product.id, this.authService.getUsername())
+    this.productsService.likeProduct(this.product.id, this.authService.getUsername());
   }
 
   onUnlikeButtonClick() {
-    this.productsService.unlikeProduct(this.product.id, this.authService.getUsername())
+    this.productsService.unlikeProduct(this.product.id, this.authService.getUsername());
   }
 }

@@ -1,5 +1,5 @@
-import { CategoryModel } from '../../../components/admin/models/CategoryModel'
+import { CategoryModel } from '../../../components/admin/models/CategoryModel';
 
 export interface CategoriesState {
-  readonly all: CategoryModel[]
+  readonly all: CategoryModel[];
 }

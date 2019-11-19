@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core'
-import { FormBuilder, Validators } from '@angular/forms'
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
-import { CategoriesService } from '../../../core/services/categories/categories.service'
-import { CategoryModel } from '../models/CategoryModel'
+import { CategoriesService } from '../../../core/services/categories/categories.service';
+import { CategoryModel } from '../models/CategoryModel';
 
 @Component({
   selector: 'app-create-category',
@@ -10,7 +10,7 @@ import { CategoryModel } from '../models/CategoryModel'
   styleUrls: ['./create-category.component.scss']
 })
 export class CreateCategoryComponent implements OnInit {
-  protected createCategoryForm
+  protected createCategoryForm;
 
   constructor(
     private categoriesService: CategoriesService,
@@ -18,26 +18,26 @@ export class CreateCategoryComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.createForm()
+    this.createForm();
   }
 
   create() {
     if (this.createCategoryForm.invalid) {
-      return
+      return;
     }
 
-    const category: CategoryModel = Object.assign({}, this.createCategoryForm.value)
+    const category: CategoryModel = Object.assign({}, this.createCategoryForm.value);
 
-    this.categoriesService.createCategory(category)
+    this.categoriesService.createCategory(category);
   }
 
-  get name () {
-    return this.createCategoryForm.get('name')
+  get name() {
+    return this.createCategoryForm.get('name');
   }
 
   private createForm() {
     this.createCategoryForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]]
-    })
+    });
   }
 }

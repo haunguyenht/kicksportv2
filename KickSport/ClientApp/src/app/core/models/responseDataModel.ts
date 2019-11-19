@@ -1,5 +1,5 @@
 export class ResponseDataModel {
-  public data?: any
-  public message?: string
-  public errors?: any
+  public data?: any;
+  public message?: string;
+  public errors?: any;
 }

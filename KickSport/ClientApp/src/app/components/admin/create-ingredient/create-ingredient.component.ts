@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core'
-import { FormBuilder, Validators } from '@angular/forms'
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
-import { IngredientsService } from '../../../core/services/ingredients/ingredients.service'
-import { IngredientModel } from '../models/IngredientModel'
+import { IngredientsService } from '../../../core/services/ingredients/ingredients.service';
+import { IngredientModel } from '../models/IngredientModel';
 
 @Component({
   selector: 'app-create-ingredient',
@@ -10,7 +10,7 @@ import { IngredientModel } from '../models/IngredientModel'
   styleUrls: ['./create-ingredient.component.scss']
 })
 export class CreateIngredientComponent implements OnInit {
-  protected createIngredientForm
+  protected createIngredientForm;
 
   constructor(
     private ingredientsService: IngredientsService,
@@ -18,26 +18,26 @@ export class CreateIngredientComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.createForm()
+    this.createForm();
   }
 
   create() {
     if (this.createIngredientForm.invalid) {
-      return
+      return;
     }
 
-    const ingredient: IngredientModel = Object.assign({}, this.createIngredientForm.value)
+    const ingredient: IngredientModel = Object.assign({}, this.createIngredientForm.value);
 
-    this.ingredientsService.createIngredient(ingredient)
+    this.ingredientsService.createIngredient(ingredient);
   }
 
-  get name () {
-    return this.createIngredientForm.get('name')
+  get name() {
+    return this.createIngredientForm.get('name');
   }
 
   private createForm() {
     this.createIngredientForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]]
-    })
+    });
   }
 }

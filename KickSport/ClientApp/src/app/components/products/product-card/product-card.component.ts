@@ -1,15 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core'
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
-import { ProductModel } from '../models/ProductModel'
-import { Router } from '@angular/router'
-import { Store } from '@ngrx/store'
+import { Component, Input, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProductModel } from '../models/ProductModel';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
-import { AddToCart } from '../../../core/store/cart/cart.actions'
-import { AppState } from '../../../core/store/app.state'
-import { AuthenticationService } from '../../../core/services/authentication/authentication.service'
-import { CartProductModel } from '../../../core/models/CartProductModel'
-import { ProductDeleteModalComponent } from '../product-delete-modal/product-delete-modal.component'
-import { environment } from 'src/environments/environment'
+import { AddToCart } from '../../../core/store/cart/cart.actions';
+import { AppState } from '../../../core/store/app.state';
+import { AuthenticationService } from '../../../core/services/authentication/authentication.service';
+import { CartProductModel } from '../../../core/models/CartProductModel';
+import { ProductDeleteModalComponent } from '../product-delete-modal/product-delete-modal.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-card',
@@ -17,39 +17,38 @@ import { environment } from 'src/environments/environment'
   styleUrls: ['./product-card.component.scss']
 })
 export class ProductCardComponent {
-  @Input() protected product: ProductModel
+  @Input() protected product: ProductModel;
   imageUrl: string;
 
   constructor(
     protected authService: AuthenticationService,
     private store: Store<AppState>,
     private router: Router,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal) {
+      const loginUrl = environment.images;
+      this.imageUrl = loginUrl;
+    }
 
-  ngOnInit() {
-    const loginUrl = environment.images
-    this.imageUrl = loginUrl;
-  }
   addToCart() {
     if (!this.authService.isAuthenticated()) {
-      this.router.navigate(['/cart'])
-      return
+      this.router.navigate(['/cart']);
+      return;
     }
     const productToAdd = new CartProductModel(
       this.product.id,
       this.product.name,
       1,
-      this.product.price)
+      this.product.price);
 
-    this.store.dispatch(new AddToCart(productToAdd))
-    this.router.navigate(['/cart'])
+    this.store.dispatch(new AddToCart(productToAdd));
+    this.router.navigate(['/cart']);
   }
 
   openDeleteProductModal() {
-    const deleteRef = this.modalService.open(ProductDeleteModalComponent)
-    deleteRef.componentInstance.productId = this.product.id
+    const deleteRef = this.modalService.open(ProductDeleteModalComponent);
+    deleteRef.componentInstance.productId = this.product.id;
     deleteRef.result.then((result) => {
     }).catch((error) => {
-    })
+    });
   }
 }
