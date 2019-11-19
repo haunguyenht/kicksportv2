@@ -45,12 +45,15 @@ namespace KickSport.Data.Repository
             => await DbSet.Where(criteria).ToListAsync();
         #endregion
 
-        #region First
+        #region First and Last
         public async Task<TEntity> FirstAsync()
             => await DbSet.FirstAsync();
-
         public async Task<TEntity> FirstAsync(Expression<Func<TEntity, bool>> criteria)
             => await DbSet.FirstAsync(criteria);
+        public async Task<TEntity> LastAsync()
+            => await DbSet.LastAsync();
+        public async Task<TEntity> LastAsync(Expression<Func<TEntity, bool>> criteria)
+            => await DbSet.LastAsync(criteria);
         #endregion
 
         #region Add

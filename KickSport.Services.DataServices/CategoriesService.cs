@@ -25,7 +25,7 @@ namespace KickSport.Services.DataServices
         public async Task<List<CategoryDto>> All()
         {
             var categories = await _categoriesRepository.GetAllAsync();
-            var categoryDto = _mapper.Map<IEnumerable<CategoryDto>>(categories.ToList())
+            var categoryDto = _mapper.Map<List<CategoryDto>>(categories.ToList())
                 .OrderBy(c => c.Name)
                 .ToList();
             return categoryDto;

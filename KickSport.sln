@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KickSport.Data.Models", "Ki
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KickSport.Services.DataServices", "KickSport.Services.DataServices\KickSport.Services.DataServices.csproj", "{2C9F3AA8-FA52-47D5-8B1A-F76BD619022B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KickSport.Services.DataServices.Tests", "KickSport.Services.DataServices.Tests\KickSport.Services.DataServices.Tests.csproj", "{600F887A-5708-4671-97AB-A3C0FA2743B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{2C9F3AA8-FA52-47D5-8B1A-F76BD619022B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C9F3AA8-FA52-47D5-8B1A-F76BD619022B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C9F3AA8-FA52-47D5-8B1A-F76BD619022B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{600F887A-5708-4671-97AB-A3C0FA2743B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{600F887A-5708-4671-97AB-A3C0FA2743B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{600F887A-5708-4671-97AB-A3C0FA2743B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{600F887A-5708-4671-97AB-A3C0FA2743B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{84883BC5-25BF-40F8-AEA6-489AE92BA2F2} = {A49CF98D-F2E9-415B-AEE4-1472A8F922D0}
 		{EE8C95D3-8140-43D5-B698-4BD3ED6D2619} = {A49CF98D-F2E9-415B-AEE4-1472A8F922D0}
 		{2C9F3AA8-FA52-47D5-8B1A-F76BD619022B} = {4A42F87C-6679-4A2D-AD08-21D82FE9F08F}
+		{600F887A-5708-4671-97AB-A3C0FA2743B4} = {72058DA9-54B4-4CDC-A5F4-87FAA5047A13}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FFD3A534-90DC-492A-985A-2B2A01CA0BA8}

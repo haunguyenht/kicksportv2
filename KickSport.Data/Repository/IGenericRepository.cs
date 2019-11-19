@@ -18,6 +18,8 @@ namespace KickSport.Data.Repository
         Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> criteria);
         Task<TEntity> FirstAsync();
         Task<TEntity> FirstAsync(Expression<Func<TEntity, bool>> criteria);
+        Task<TEntity> LastAsync();
+        Task<TEntity> LastAsync(Expression<Func<TEntity, bool>> criteria);
         Task AddAsync(TEntity entity);
         Task AddRangeAsync(IEnumerable<TEntity> entities);
         Task Update(TEntity entity);
