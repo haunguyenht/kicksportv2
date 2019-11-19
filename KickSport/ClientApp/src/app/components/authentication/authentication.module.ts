@@ -12,7 +12,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 const config = new AuthServiceConfig([
   {
     id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider('212702559538083')
+    provider: new FacebookLoginProvider('426340324965190')
   }
 ]);
 
